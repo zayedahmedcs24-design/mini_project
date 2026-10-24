@@ -1,0 +1,11 @@
+{
+  "split": "bolivia",
+  "num_chips": 15,
+  "mc_samples": 20,
+  "ece": 0.05448880533867668,
+  "mce": 0.6735504333221682,
+  "error_detection_auroc": 0.7094384962463738,
+  "error_rate": 7.22665164942648,
+  "total_valid_pixels": 2867815,
+  "error_pixels": 207247
+}

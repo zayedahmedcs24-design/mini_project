@@ -1,0 +1,40 @@
+# Training configuration for DeepLabV3+ ResNet-34 on Sen1Floods11
+experiment_name: "deeplabv3p_resnet34"
+seed: 42
+
+model:
+  architecture: "deeplabv3p"
+  encoder_name: "resnet34"
+  encoder_weights: "imagenet"
+  in_channels: 2
+  classes: 1
+
+data:
+  root_dir: "data"
+  train_split: "data/splits/flood_train_data.csv"
+  valid_split: "data/splits/flood_valid_data.csv"
+  test_split: "data/splits/flood_test_data.csv"
+  bolivia_split: "data/splits/flood_bolivia_data.csv"
+  image_size: 512
+  ignore_index: -1
+
+training:
+  batch_size: 4
+  gradient_accumulation_steps: 1
+  learning_rate: 0.0003
+  min_learning_rate: 0.000001
+  weight_decay: 0.01
+  max_epochs: 30
+  early_stopping_patience: 8
+  use_amp: true
+  num_workers: 0
+
+smoke:
+  epochs: 2
+  batch_size: 2
+  max_samples: 8
+
+loss:
+  bce_weight: 0.5
+  dice_weight: 1.0
+  smooth: 1.0

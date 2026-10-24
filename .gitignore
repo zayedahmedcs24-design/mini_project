@@ -1,0 +1,65 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyTorch checkpoints
+*.pth
+*.pt
+*.ckpt
+
+# Datasets and heavy geospatial rasters (DO NOT COMMIT)
+data/raw/
+data/worldpop/
+data/osm/
+data/precomputed_layers/
+data/processed/
+*.tif
+*.tiff
+*.geotiff
+*.h5
+*.hdf5
+*.nc
+*.gpkg
+
+# Results / logs
+results/*.png
+results/*.jpg
+results/*.pdf
+wandb/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+$RECYCLE.BIN/
