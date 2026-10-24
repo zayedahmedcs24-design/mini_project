@@ -104,3 +104,4 @@ python train.py --config configs/unet_resnet34.yaml --smoke
 * **Member C (Uncertainty & Exposure):** MC Dropout, Deep Ensembles, ECE calibration, fractional WorldPop population and OSM road exposure.
 * **Member D (Web & Systems):** FastAPI backend, Leaflet interactive map viewer, Turnitin screening (< 25%), report compilation.
 # mini_project
+# mini_project
