@@ -1,0 +1,52 @@
+{
+  "split": "train",
+  "total_chips": 252,
+  "total_pixels": 66060288,
+  "nan_analysis": {
+    "total_nan_pixels": 1325136,
+    "vv_nan_pixels": 1325136,
+    "vh_nan_pixels": 1325136,
+    "nan_inside_ignore_regions": 1300986,
+    "nan_outside_ignore_regions": 24150,
+    "pct_nans_inside_ignore": 98.17754555004166,
+    "handling_in_dataset_py": "Imputed with minimum valid floor backscatter values: VV NaNs -> -35.0 dB, VH NaNs -> -45.0 dB, then clipped to [clip_min, clip_max]."
+  },
+  "vv": {
+    "raw": {
+      "min": -65.45004272460938,
+      "max": 29.926393508911133,
+      "mean": -10.375943183898926,
+      "std": 4.019079685211182
+    },
+    "percentiles": {
+      "p1": -23.80088514328003,
+      "median": -9.828713417053223,
+      "p99": -2.4347058248520517
+    },
+    "clipped": {
+      "min": -35.0,
+      "max": 5.0,
+      "mean": -10.887344014076959,
+      "std": 5.273703646201442
+    }
+  },
+  "vh": {
+    "raw": {
+      "min": -79.16144561767578,
+      "max": 17.376384735107422,
+      "mean": -17.224905014038086,
+      "std": 4.731506824493408
+    },
+    "percentiles": {
+      "p1": -34.084128608703615,
+      "median": -16.33925437927246,
+      "p99": -9.542313356399562
+    },
+    "clipped": {
+      "min": -45.0,
+      "max": 0.0,
+      "mean": -17.794895758704534,
+      "std": 6.090917391545316
+    }
+  }
+}

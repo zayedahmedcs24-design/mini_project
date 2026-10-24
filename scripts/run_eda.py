@@ -31,8 +31,8 @@ def run_eda(data_dir: Path = Path("data")):
         return
 
     print(f"Auditing {len(s1_files)} downloaded sample chips...\n")
-    print(f"{'Chip ID':25s} | {'VV Min':7s} | {'VV Max':7s} | {'VV Mean':7s} | {'VH Mean':7s} | {'Flood %':7s} | {'Ignore %':8s}")
-    print("-" * 85)
+    print(f"{'Chip ID':25s} | {'VV Min':7s} | {'VV Max':7s} | {'VV Mean':7s} | {'VH Mean':7s} | {'Flood % of Valid':20s} | {'Ignore % of Total':20s}")
+    print("-" * 105)
 
     total_flood = 0
     total_land = 0
@@ -72,19 +72,28 @@ def run_eda(data_dir: Path = Path("data")):
         total_land += land_px
         total_ignore += ignore_px
 
-        print(f"{chip_id:25s} | {vv_min:7.2f} | {vv_max:7.2f} | {vv_mean:7.2f} | {vh_mean:7.2f} | {flood_pct:6.2f}% | {ignore_pct:7.2f}%")
+        flood_str = f"{flood_px}/{valid_px} ({flood_pct:5.2f}%)"
+        ignore_str = f"{ignore_px}/{all_px} ({ignore_pct:5.2f}%)"
+
+        print(f"{chip_id:25s} | {vv_min:7.2f} | {vv_max:7.2f} | {vv_mean:7.2f} | {vh_mean:7.2f} | {flood_str:20s} | {ignore_str:20s}")
 
     total_valid = total_flood + total_land
     total_all = total_valid + total_ignore
-    print("=" * 85)
+    pct_flood_valid = (total_flood / total_valid * 100.0) if total_valid > 0 else 0.0
+    pct_land_valid = (total_land / total_valid * 100.0) if total_valid > 0 else 0.0
+    pct_ignore_total = (total_ignore / total_all * 100.0) if total_all > 0 else 0.0
+
+    print("=" * 105)
     print("AGGREGATED AUDIT SUMMARY:")
     print(f"  • Coordinate Reference System: {crs}")
     print(f"  • Spatial Resolution: {res} (meters per pixel)")
-    print(f"  • Total Valid Pixels Audited: {total_valid:,}")
-    print(f"  • Flood Pixels: {total_flood:,} ({total_flood/total_valid*100:.2f}% of valid terrain)")
-    print(f"  • Dry Land Pixels: {total_land:,} ({total_land/total_valid*100:.2f}% of valid terrain)")
-    print(f"  • Ignore / Cloud Pixels: {total_ignore:,} ({total_ignore/total_all*100:.2f}% of total pixels)")
-    print("=" * 85)
+    print(f"  • Total Pixels (All): {total_all:,}")
+    print(f"  • Total Valid Pixels (Non-Ignore): {total_valid:,}")
+    print(f"  • Total Ignore / Cloud Pixels: {total_ignore:,}")
+    print(f"  • (a) Flood % of Valid (non-ignore) pixels: {total_flood:,} / {total_valid:,} ({pct_flood_valid:.4f}%) [Denominator: {total_valid:,} valid non-ignore pixels]")
+    print(f"  • Dry Land % of Valid (non-ignore) pixels: {total_land:,} / {total_valid:,} ({pct_land_valid:.4f}%) [Denominator: {total_valid:,} valid non-ignore pixels]")
+    print(f"  • (b) Ignore % of Total pixels: {total_ignore:,} / {total_all:,} ({pct_ignore_total:.4f}%) [Denominator: {total_all:,} total pixels]")
+    print("=" * 105)
 
 
 if __name__ == "__main__":

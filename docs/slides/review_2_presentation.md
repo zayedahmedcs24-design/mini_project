@@ -95,57 +95,72 @@
 ---
 
 ## SLIDE 7: Data Engineering & Radiometric Verification
-* **Radiometric Check (Empirical Ground Truth):**
+* **Radiometric Check & Distribution Audit (from `results/sar_stats.json` on Train Split):**
   * Inspection of `S1Hand` chips confirms raw values are **already in decibels (dB)**:
-    * VV Range: `[-40.82, -0.69] dB`, Mean: `-13.01 dB`
-    * VH Range: `[-48.25, -6.99] dB`, Mean: `-19.29 dB`
+    * **1. Raw Backscatter (All Pixels):**
+      * VV: `[-65.45, +29.93] dB` (Mean: `-10.38 dB`, Std: `4.02 dB`)
+      * VH: `[-79.16, +17.38] dB` (Mean: `-17.22 dB`, Std: `4.73 dB`)
+    * **2. 1st–99th Percentile (Core Empirical Distribution):**
+      * VV: `[-23.80, -2.43] dB` (Median: `-9.83 dB`)
+      * VH: `[-34.08, -9.54] dB` (Median: `-16.34 dB`)
+    * **3. Post-Clipping (Implemented in `dataset.py`):**
+      * VV: `[-35.00, +5.00] dB` (Mean: `-10.89 dB`, Std: `5.27 dB`)
+      * VH: `[-45.00, 0.00] dB` (Mean: `-17.79 dB`, Std: `6.09 dB`)
   * *Critical Safeguard:* Applying $10 \cdot \log_{10}$ would be mathematically invalid on negative numbers. Values are normalized via Z-score scaling.
+* **NaN Pixel Analysis & Safeguard Handling:**
+  * Across all 252 train chips (66,060,288 pixels), `1,325,136` pixels contain NaNs (`2.01%`).
+  * **98.18% of NaNs** (`1,300,986` pixels) fall **strictly inside ignore (`-1`) regions** (cloud/no-data borders). Only `24,150` NaNs (`1.82%`) occur in labeled terrain.
+  * *Handling in `dataset.py`:* Imputed safely with floor backscatter (`-35.0 dB` for VV, `-45.0 dB` for VH) before clipping and standardization, ensuring zero NaNs leak to model tensors.
 * **Label Integrity & Class Imbalance:**
   * Label values are strictly verified: `1` (Water), `0` (Dry land), `-1` (Ignore/Cloud).
-  * Empirical class balance on sample chips shows extreme imbalance (e.g., Ghana flood pixels are only **0.6%** of valid pixels; Bolivia water is **13.5%**).
-  * *Why Overall Accuracy Fails:* A trivial model predicting all dry land achieves $> 86\text{--}99\%$ accuracy, but **0.00% Flood IoU**.
+  * Empirical class balance shows severe imbalance: flood terrain is only **10.60%** of valid pixels across the dataset (`10,705,605 / 100,983,314`), while ignore pixels account for **13.63%** of all pixels (`15,932,910 / 116,916,224`).
+  * *Why Overall Accuracy Fails:* A trivial model predicting all dry land achieves $> 89\%$ accuracy, but **0.00% Flood IoU**.
 
 ---
 
-## SLIDE 8: Baseline Module Implementation (Otsu Thresholding)
-* **Full Dataset Empirical Results from `results/otsu_baseline_results.json` (All 446 Chips):**
+## SLIDE 8: Comprehensive Baseline & Multi-Seed Benchmark Evaluation
+* **Empirical Multi-Seed Benchmark Results (Mean ± Std Across Seeds 0, 1, 2 from `results/*.json` and `results/metrics_summary_table.csv` — Run 2 Matched Recipe):**
 
-| Split Evaluated | Chips | Variant | Flood IoU (%) | Flood F1 (%) | Precision (%) | Recall (%) |
-| :--- | :---: | :--- | :---: | :---: | :---: | :---: |
-| **Validation** | 89 / 89 | VV | 18.72% | 31.54% | 20.37% | 69.82% |
-| **Validation** | 89 / 89 | VH | 22.00% | 36.06% | 23.77% | 74.67% |
-| **Validation** | 89 / 89 | Dual-Pol Mean | **21.52%** | **35.42%** | 23.25% | 74.33% |
-| **Test** | 90 / 90 | VV | 21.87% | 35.89% | 23.77% | 73.22% |
-| **Test** | 90 / 90 | VH | 23.98% | 38.68% | 26.24% | 73.52% |
-| **Test** | 90 / 90 | Dual-Pol Mean | **24.73%** | **39.65%** | 27.04% | 74.32% |
-| **Bolivia (Held-Out)** | 15 / 15 | VV | 31.11% | 47.46% | 39.68% | 59.03% |
-| **Bolivia (Held-Out)** | 15 / 15 | VH | 33.34% | 50.01% | 41.66% | 62.54% |
-| **Bolivia (Held-Out)** | 15 / 15 | Dual-Pol Mean | **34.73%** | **51.55%** | 44.20% | 61.84% |
+| Split Evaluated | Method / Architecture | Variant / Setup | Seeds | Flood IoU (%) | Flood F1 (%) | Precision (%) | Recall (%) |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **Validation** (89 chips) | Otsu (Per-Chip Dynamic) | Dual-Pol Mean | Det. | 21.52% | 35.42% | 23.25% | 74.33% |
+| **Validation** (89 chips) | Otsu (Train-Fitted Global) | Dual-Pol Mean | Det. | 44.58% | 61.67% | 53.49% | 72.81% |
+| **Validation** (89 chips) | **U-Net (ResNet-34)** | Dual-Pol (BS=8) | 3 | **60.60 ± 0.26%** | 75.47 ± 0.20% | 75.88 ± 4.37% | 75.38 ± 4.23% |
+| **Validation** (89 chips) | **DeepLabV3+ (ResNet-34)** | Dual-Pol (BS=8) | 3 | **61.62 ± 0.35%** | 76.25 ± 0.27% | 78.08 ± 3.93% | 74.71 ± 2.99% |
+| **Test** (90 chips) | Otsu (Per-Chip Dynamic) | Dual-Pol Mean | Det. | 24.73% | 39.65% | 27.04% | 74.32% |
+| **Test** (90 chips) | Otsu (Train-Fitted Global) | Dual-Pol Mean | Det. | 49.54% | 66.26% | 58.60% | 76.22% |
+| **Test** (90 chips) | **U-Net (ResNet-34)** | Dual-Pol (BS=8) | 3 | **63.81 ± 0.15%** | 77.91 ± 0.11% | 78.27 ± 4.01% | 77.82 ± 4.06% |
+| **Test** (90 chips) | **DeepLabV3+ (ResNet-34)** | Dual-Pol (BS=8) | 3 | **64.27 ± 0.52%** | 78.25 ± 0.39% | 79.72 ± 2.92% | 76.99 ± 3.37% |
+| **Bolivia** (15 chips) | Otsu (Per-Chip Dynamic) | Dual-Pol Mean | Det. | 34.73% | 51.55% | 44.20% | 61.84% |
+| **Bolivia** (15 chips) | Otsu (Train-Fitted Global) | Dual-Pol Mean | Det. | 64.81% | 78.65% | 74.89% | 82.80% |
+| **Bolivia** (15 chips) | **U-Net (ResNet-34)** | Dual-Pol (BS=8) | 3 | **60.30 ± 7.59%** | 75.04 ± 6.08% | 78.40 ± 1.17% | 72.66 ± 11.45% |
+| **Bolivia** (15 chips) | **DeepLabV3+ (ResNet-34)** | Dual-Pol (BS=8) | 3 | **61.89 ± 5.45%** | 76.37 ± 4.18% | 80.13 ± 3.49% | 73.76 ± 10.56% |
 
-* **The Otsu Anomaly Resolved:**
-  * In general scenes (Valid & Test), scenes are 89.4% dry land; unimodal histograms force Otsu to split terrestrial modes, causing low precision (~23–27%) and over 5 million false positive pixels.
-  * In Bolivia, massive flooding (up to 60% water) creates a truly bimodal histogram, raising Otsu IoU to 34.73%.
-  * VH consistently outperforms VV because volume scattering over water is minimal in cross-polarization.
+* **Rigorous Empirical Findings & Key Distinctions:**
+  1. **Evaluation Scope on Bolivia:** Bolivia contains exactly 15 hand-labeled chips representing a single geographic disaster event.
+  2. **Matched Run 2 Recipe:** Both models trained with batch size 8 on $256 \times 256$ random crops with `max_epochs = 60` and patience 8 early stopping. DeepLabV3+ peak VRAM is 519.4 MB (no OOM).
+  3. **In-Domain Comparison:** U-Net and DeepLabV3+ show **differences within seed-to-seed variation** on in-domain splits (Validation: $60.60\%$ vs $61.62\%$, a $+1.02$ percentage points difference; Test: $63.81\%$ vs $64.27\%$, a $+0.46$ percentage points difference).
+  4. **Regional Performance on Bolivia:** DeepLab achieves $61.89 \pm 5.45\%$ and U-Net achieves $60.30 \pm 7.59\%$ Flood IoU, while train-fitted Global Otsu Mean scores $64.81\%$.
+  5. **Model Stability Under Matched Recipe:** We do not claim DeepLab is unstable; across all 3 seeds in run 2, DeepLab converges stably on Bolivia ($56.26\%$, $62.27\%$, $67.14\%$). None of the 6 runs hit the 60-epoch cap (U-Net trained 12–17 epochs; DeepLab trained 17–40 epochs).
+  6. **No Regional Performance Drop:** We do **not** claim a performance drop on Bolivia. Bolivia has a higher flood fraction; we did not investigate why Otsu performs well there.
 
 ---
 
-## SLIDE 9: Deep Learning Architecture & Real U-Net Performance
-* **Model:** U-Net (ResNet-34 encoder pre-trained on ImageNet, 2-channel adapted with $\times 1.5$ scale preservation).
-* **Training Setup:** Local NVIDIA RTX 4050 GPU (6 GB VRAM), Mixed Precision (AMP), $256 \times 256$ random crops, batch size 8, AdamW ($\text{lr}=3\times 10^{-4}$), 25 epochs in ~4 minutes.
-* **Compound Masked Loss:** $\mathcal{L} = 0.5 \cdot \mathcal{L}_{\text{BCE, masked}} + 1.0 \cdot \mathcal{L}_{\text{Dice, masked}}$ (excluding `-1` ignore pixels).
-* **Empirical Validation vs Otsu Baseline:**
-
-| Evaluation Split | Model Architecture | Flood IoU (%) | Flood F1 (%) | Precision (%) | Recall (%) |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **Validation** (89 chips) | Otsu (Dual-Pol Mean) | 21.52% | 35.42% | 23.25% | 74.33% |
-| **Validation** (89 chips) | **U-Net ResNet-34 (Seed 0)** | **61.98%** (+40.5%) | **76.52%** | **75.27%** | **77.82%** |
-| **Test** (90 chips) | Otsu (Dual-Pol Mean) | 24.73% | 39.65% | 27.04% | 74.32% |
-| **Test** (90 chips) | **U-Net ResNet-34 (Seed 0)** | **65.01%** (+40.3%) | **78.80%** | **78.27%** | **79.33%** |
-| **Bolivia** (15 chips) | Otsu (Dual-Pol Mean) | 34.73% | 51.55% | 44.20% | 61.84% |
-| **Bolivia** (15 chips) | **U-Net ResNet-34 (Seed 0)** | **62.76%** (+28.0%) | **77.12%** | **77.46%** | **76.78%** |
-
-* **Real Visual Predictions Generated:** 5-panel diagnostic maps (`results/real_prediction_valid.png` and `results/real_prediction_bolivia.png`) demonstrating precise water delineation, low false alarms, and minimal cross-region degradation (-2.25% IoU drop on Bolivia).
-* **Test Suite Status:** 22/22 unit tests passing in `tests/` across dataset, metrics, models, losses, otsu, and exposure modules.
+## SLIDE 9: Deep Learning Architecture, Failure Diagnostics & Verification
+* **Model Implementations & Safeguards:**
+  * Both architectures employ an ImageNet pre-trained ResNet-34 backbone adapted to 2-channel Sentinel-1 SAR inputs with scale preservation.
+  * Monitored with early stopping strictly on Validation Flood IoU (patience=8); best checkpoints saved as `<model>_seed<k>_best.pth`.
+  * Compound loss: $\mathcal{L} = 0.5 \cdot \mathcal{L}_{\text{BCE, masked}} + 1.0 \cdot \mathcal{L}_{\text{Dice, masked}}$ (excluding `-1` ignore pixels).
+* **Diagnostic Visualizations Generated in `results/figures/`:**
+  * `fig_iou_bars.png`: Flood IoU across splits (mean ± std) comparing Global Otsu Mean, U-Net, and DeepLabV3+.
+  * `fig_val_curves.png`: Validation Flood IoU vs epoch trajectories across all 6 runs with saved best checkpoints indicated.
+  * `fig_examples_test.png`: 4 test chips (2 good floodplains, 2 edge-case failures) displaying SAR VV, SAR VH, Ground Truth (gray ignore), U-Net prediction, and Global Otsu prediction.
+  * `fig_examples_bolivia.png`: 3 Bolivia chips highlighting DeepLabV3+ predictions vs Ground Truth and Global Otsu.
+  * `fig_otsu_failure.png`: 3 dry-land chips demonstrating the classical per-chip Otsu failure mode (bisection of unimodal dry land resulting in $> 48\%$ false alarm flood) vs correct rejection by train-fitted Global Otsu.
+* **Near-Zero Flood Trap in Per-Chip Analysis:**
+  * Chips with $<1\%$ flood or $100\%$ ignore are marked *"IoU not meaningful"* and excluded from worst-chip ranking. Ranking the 10 worst test chips strictly among chips with $\ge 1\%$ flood identifies genuine structural errors (e.g., `Somalia_699062` at $3.15\%$ IoU), while separate ranking highlights chips with high false positives (e.g., `Paraguay_271769` and `Pakistan_70625`).
+* **Automated Test Suite Status:**
+  * **29 / 29 unit tests passing** via `pytest tests/ -v` (covering datasets, ignore masking, metrics, architectures, Otsu baselines, exposure math, and uncertainty calibration).
 
 ---
 

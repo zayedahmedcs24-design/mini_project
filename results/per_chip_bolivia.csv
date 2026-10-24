@@ -1,0 +1,16 @@
+﻿Chip ID,Flood % (Valid Pixels),Ignore %,U-Net Flood IoU (%) [Mean],DeepLabV3+ Flood IoU (%) [Mean],Global Otsu Mean Flood IoU (%),Evaluation Status,Notes
+Bolivia_103757,40.15%,66.40%,76.59%,79.18%,82.16%,Valid Evaluation,
+Bolivia_129334,65.87%,9.28%,83.35%,84.10%,86.48%,Valid Evaluation,
+Bolivia_195474,0.59%,0.31%,0.21%,0.63%,3.65%,IoU not meaningful,IoU not meaningful (<1% flood: 0.59%)
+Bolivia_23014,3.71%,20.09%,19.74%,26.68%,19.92%,Valid Evaluation,
+Bolivia_233925,0.00%,42.57%,0.00%,0.00%,0.00%,IoU not meaningful,IoU not meaningful (<1% flood: 0.00%)
+Bolivia_242570,15.58%,33.05%,34.91%,28.59%,34.76%,Valid Evaluation,
+Bolivia_290290,9.63%,21.94%,52.73%,56.03%,51.14%,Valid Evaluation,
+Bolivia_294583,11.50%,50.23%,59.99%,71.80%,75.59%,Valid Evaluation,
+Bolivia_312675,6.06%,39.72%,12.65%,18.16%,39.52%,Valid Evaluation,
+Bolivia_314919,44.31%,27.96%,67.89%,68.66%,76.97%,Valid Evaluation,
+Bolivia_360519,1.10%,3.07%,20.69%,16.61%,20.49%,Valid Evaluation,
+Bolivia_379434,4.12%,0.00%,21.67%,27.18%,22.84%,Valid Evaluation,
+Bolivia_432776,45.98%,40.15%,56.45%,54.11%,70.01%,Valid Evaluation,
+Bolivia_60373,6.27%,24.08%,49.98%,55.48%,68.26%,Valid Evaluation,
+Bolivia_76104,0.00%,27.15%,0.00%,0.00%,0.00%,IoU not meaningful,IoU not meaningful (<1% flood: 0.00%)

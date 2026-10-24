@@ -1,0 +1,30 @@
+# Sen1Floods11 Metrics Summary Table
+
+Generated automatically from evaluation JSON files across 3 random seeds (0, 1, 2) and deterministic baselines.
+
+| Split | Architecture / Baseline | Variant / Polarization | Seeds Evaluated | Flood IoU (%) | Flood F1 (%) | Precision (%) | Recall (%) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Valid | Otsu (Per-Chip Dynamic) | VV | Deterministic (N/A) | 18.72% | 31.54% | 20.37% | 69.82% |
+| Valid | Otsu (Train-Fitted Global) | VV | Deterministic (N/A) | 31.47% | 47.87% | 35.55% | 73.27% |
+| Valid | Otsu (Per-Chip Dynamic) | VH | Deterministic (N/A) | 22.00% | 36.06% | 23.77% | 74.67% |
+| Valid | Otsu (Train-Fitted Global) | VH | Deterministic (N/A) | 42.62% | 59.77% | 48.42% | 78.06% |
+| Valid | Otsu (Per-Chip Dynamic) | MEAN | Deterministic (N/A) | 21.52% | 35.42% | 23.25% | 74.33% |
+| Valid | Otsu (Train-Fitted Global) | MEAN | Deterministic (N/A) | 44.58% | 61.67% | 53.49% | 72.81% |
+| Test | Otsu (Per-Chip Dynamic) | VV | Deterministic (N/A) | 21.87% | 35.89% | 23.77% | 73.22% |
+| Test | Otsu (Train-Fitted Global) | VV | Deterministic (N/A) | 33.88% | 50.61% | 39.04% | 71.94% |
+| Test | Otsu (Per-Chip Dynamic) | VH | Deterministic (N/A) | 23.98% | 38.68% | 26.24% | 73.52% |
+| Test | Otsu (Train-Fitted Global) | VH | Deterministic (N/A) | 48.12% | 64.98% | 54.56% | 80.32% |
+| Test | Otsu (Per-Chip Dynamic) | MEAN | Deterministic (N/A) | 24.73% | 39.65% | 27.04% | 74.32% |
+| Test | Otsu (Train-Fitted Global) | MEAN | Deterministic (N/A) | 49.54% | 66.26% | 58.60% | 76.22% |
+| Bolivia | Otsu (Per-Chip Dynamic) | VV | Deterministic (N/A) | 31.11% | 47.46% | 39.68% | 59.03% |
+| Bolivia | Otsu (Train-Fitted Global) | VV | Deterministic (N/A) | 56.38% | 72.11% | 63.19% | 83.95% |
+| Bolivia | Otsu (Per-Chip Dynamic) | VH | Deterministic (N/A) | 33.34% | 50.01% | 41.66% | 62.54% |
+| Bolivia | Otsu (Train-Fitted Global) | VH | Deterministic (N/A) | 62.13% | 76.64% | 71.15% | 83.05% |
+| Bolivia | Otsu (Per-Chip Dynamic) | MEAN | Deterministic (N/A) | 34.73% | 51.55% | 44.20% | 61.84% |
+| Bolivia | Otsu (Train-Fitted Global) | MEAN | Deterministic (N/A) | 64.81% | 78.65% | 74.89% | 82.80% |
+| Valid | U-Net ResNet-34 | Dual-Pol (VV + VH) | 3/3 (0, 1, 2) | 61.29 ± 0.71% | 76.00 ± 0.54% | 73.61 ± 0.62% | 78.55 ± 0.86% |
+| Test | U-Net ResNet-34 | Dual-Pol (VV + VH) | 3/3 (0, 1, 2) | 64.45 ± 1.16% | 78.38 ± 0.86% | 76.33 ± 1.07% | 80.54 ± 0.67% |
+| Bolivia | U-Net ResNet-34 | Dual-Pol (VV + VH) | 3/3 (0, 1, 2) | 65.08 ± 0.88% | 78.85 ± 0.65% | 77.37 ± 0.60% | 80.39 ± 1.40% |
+| Valid | DeepLabV3+ ResNet-34 | Dual-Pol (VV + VH) | 3/3 (0, 1, 2) | 61.22 ± 1.28% | 75.94 ± 0.99% | 78.31 ± 5.22% | 74.00 ± 3.26% |
+| Test | DeepLabV3+ ResNet-34 | Dual-Pol (VV + VH) | 3/3 (0, 1, 2) | 64.03 ± 0.95% | 78.07 ± 0.70% | 79.23 ± 3.48% | 77.10 ± 2.83% |
+| Bolivia | DeepLabV3+ ResNet-34 | Dual-Pol (VV + VH) | 3/3 (0, 1, 2) | 57.80 ± 9.74% | 72.92 ± 8.07% | 78.46 ± 1.88% | 68.99 ± 13.73% |

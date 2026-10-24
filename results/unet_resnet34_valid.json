@@ -6,7 +6,6 @@
     "flood_f1": 0.06669565250846808,
     "flood_precision": 0.034502388535018115,
     "flood_recall": 0.996550534655668,
-    "accuracy_valid": 0.04013755114637558,
     "total_valid_pixels": 252706,
     "tp": 8667,
     "fp": 242533,

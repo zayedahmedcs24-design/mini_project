@@ -26,7 +26,7 @@ training:
   learning_rate: 0.0003
   min_learning_rate: 0.000001
   weight_decay: 0.01
-  max_epochs: 25
+  max_epochs: 60
   early_stopping_patience: 8
   use_amp: true
   num_workers: 0 # Windows safe

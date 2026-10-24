@@ -1,0 +1,91 @@
+﻿Chip ID,Flood % (Valid Pixels),Ignore %,U-Net Flood IoU (%) [Mean],DeepLabV3+ Flood IoU (%) [Mean],Global Otsu Mean Flood IoU (%),Evaluation Status,Worst U-Net Rank (>=1% Flood),FP Rank (Most False Positives),U-Net False Positive Pixels,Notes
+Ghana_313799,6.11%,6.74%,5.44%,5.69%,9.53%,Valid Evaluation,#4,,7,Ranked #4 worst IoU
+Ghana_1078550,0.54%,0.00%,3.89%,2.87%,4.34%,IoU not meaningful,,,1,IoU not meaningful (<1% flood: 0.54%)
+Ghana_97059,0.00%,89.55%,0.00%,0.00%,0.00%,IoU not meaningful,,,366,IoU not meaningful (<1% flood: 0.00%)
+Ghana_359826,1.33%,0.00%,42.94%,42.16%,26.03%,Valid Evaluation,,,600,
+Ghana_319168,23.03%,34.53%,49.17%,51.00%,54.61%,Valid Evaluation,,,891,
+Ghana_866994,90.18%,55.17%,62.31%,60.76%,59.48%,Valid Evaluation,,,10296,
+Ghana_406026,1.64%,0.00%,70.80%,78.05%,32.94%,Valid Evaluation,,,852,
+Ghana_53713,0.00%,0.00%,0.00%,0.00%,0.00%,IoU not meaningful,,,0,IoU not meaningful (<1% flood: 0.00%)
+Ghana_83483,0.00%,100.00%,0.00%,0.00%,0.00%,IoU not meaningful,,,0,IoU not meaningful (100% ignore pixels)
+Ghana_167233,0.00%,0.00%,0.00%,0.00%,0.00%,IoU not meaningful,,,0,IoU not meaningful (<1% flood: 0.00%)
+Ghana_141271,0.62%,0.00%,1.84%,0.06%,2.93%,IoU not meaningful,,,0,IoU not meaningful (<1% flood: 0.62%)
+India_900498,47.31%,0.06%,76.86%,76.95%,76.84%,Valid Evaluation,,#8,23495,Ranked #8 highest FP (23495 px)
+India_591317,46.35%,6.14%,87.86%,87.09%,87.54%,Valid Evaluation,,,8675,
+India_747992,44.76%,0.02%,41.68%,44.07%,49.07%,Valid Evaluation,,,1374,
+India_79637,1.97%,0.00%,8.62%,9.31%,8.68%,Valid Evaluation,#6,,139,Ranked #6 worst IoU
+India_952728,3.10%,28.01%,15.39%,19.36%,15.30%,Valid Evaluation,,,520,
+India_828067,3.82%,30.15%,49.09%,47.84%,39.30%,Valid Evaluation,,,679,
+India_570384,6.01%,7.68%,40.41%,45.02%,40.72%,Valid Evaluation,,,1367,
+India_44475,0.00%,0.75%,0.00%,0.00%,0.00%,IoU not meaningful,,,6,IoU not meaningful (<1% flood: 0.00%)
+India_80221,75.44%,42.10%,86.67%,87.34%,87.01%,Valid Evaluation,,,17166,
+India_1018327,13.98%,0.00%,47.26%,51.70%,50.23%,Valid Evaluation,,,1196,
+India_592446,4.03%,14.42%,51.76%,51.41%,47.50%,Valid Evaluation,,,1629,
+India_772630,0.87%,40.75%,0.40%,1.20%,1.34%,IoU not meaningful,,,896,IoU not meaningful (<1% flood: 0.87%)
+India_631692,0.31%,0.00%,12.87%,11.36%,14.40%,IoU not meaningful,,,4,IoU not meaningful (<1% flood: 0.31%)
+India_399883,52.00%,0.01%,76.20%,76.47%,76.32%,Valid Evaluation,,#6,27821,Ranked #6 highest FP (27821 px)
+Mekong_333434,1.62%,22.51%,13.53%,13.69%,17.14%,Valid Evaluation,#10,,296,Ranked #10 worst IoU
+Mekong_45934,0.11%,0.11%,12.64%,7.09%,15.62%,IoU not meaningful,,,1,IoU not meaningful (<1% flood: 0.11%)
+Mekong_1443339,73.54%,0.00%,88.51%,89.11%,85.64%,Valid Evaluation,,,11000,
+Mekong_382276,3.74%,0.01%,89.73%,90.56%,88.41%,Valid Evaluation,,,496,
+Mekong_254910,0.07%,21.61%,0.23%,0.25%,0.88%,IoU not meaningful,,,6105,IoU not meaningful (<1% flood: 0.07%)
+Mekong_424793,1.55%,1.40%,45.17%,39.62%,40.17%,Valid Evaluation,,,759,
+Nigeria_417184,2.34%,77.47%,8.12%,9.23%,7.07%,Valid Evaluation,#5,,14658,Ranked #5 worst IoU
+Nigeria_225131,0.47%,7.97%,11.67%,5.97%,9.93%,IoU not meaningful,,,8,IoU not meaningful (<1% flood: 0.47%)
+Nigeria_812045,50.65%,9.54%,91.00%,90.80%,83.48%,Valid Evaluation,,,6702,
+Nigeria_22088,0.28%,15.07%,3.51%,3.91%,2.32%,IoU not meaningful,,,14340,IoU not meaningful (<1% flood: 0.28%)
+Pakistan_849790,66.83%,1.87%,23.74%,24.40%,25.69%,Valid Evaluation,,,2048,
+Pakistan_664885,3.26%,72.15%,21.90%,26.35%,12.66%,Valid Evaluation,,,8574,
+Pakistan_694942,9.65%,26.97%,34.81%,46.29%,20.79%,Valid Evaluation,,#3,38356,Ranked #3 highest FP (38356 px)
+Pakistan_70625,1.78%,0.00%,5.26%,5.25%,5.43%,Valid Evaluation,#3,#2,44647,Ranked #3 worst IoU; Ranked #2 highest FP (44647 px)
+Pakistan_528249,0.00%,70.63%,0.00%,0.00%,0.00%,IoU not meaningful,,,1427,IoU not meaningful (<1% flood: 0.00%)
+Pakistan_167553,0.59%,5.74%,1.83%,2.92%,0.78%,IoU not meaningful,,#9,22463,IoU not meaningful (<1% flood: 0.59%); Ranked #9 highest FP (22463 px)
+Paraguay_913449,2.10%,0.00%,40.24%,38.34%,17.48%,Valid Evaluation,,,2519,
+Paraguay_280900,2.51%,0.00%,51.92%,53.16%,18.46%,Valid Evaluation,,,1610,
+Paraguay_790830,12.23%,0.36%,90.91%,89.51%,90.69%,Valid Evaluation,,,1878,
+Paraguay_232281,11.24%,0.00%,41.76%,43.03%,33.30%,Valid Evaluation,,#5,29814,Ranked #5 highest FP (29814 px)
+Paraguay_271769,1.00%,0.00%,4.37%,14.00%,1.86%,IoU not meaningful,,#1,57337,IoU not meaningful (<1% flood: 1.00%); Ranked #1 highest FP (57337 px)
+Paraguay_40936,0.00%,17.86%,0.00%,0.00%,0.00%,IoU not meaningful,,,16479,IoU not meaningful (<1% flood: 0.00%)
+Paraguay_1029191,19.82%,3.13%,88.07%,86.41%,90.28%,Valid Evaluation,,,4433,
+Paraguay_59731,1.08%,2.47%,62.84%,63.12%,51.60%,Valid Evaluation,,,1591,
+Paraguay_683296,2.85%,0.98%,67.08%,66.43%,55.69%,Valid Evaluation,,,881,
+Paraguay_34417,100.00%,80.92%,100.00%,66.67%,100.00%,Valid Evaluation,,,0,
+Paraguay_868895,9.00%,33.07%,40.72%,40.57%,42.24%,Valid Evaluation,,,3571,
+Paraguay_511199,4.40%,0.00%,35.68%,37.69%,37.23%,Valid Evaluation,,,663,
+Paraguay_80102,0.01%,0.00%,0.00%,0.00%,0.15%,IoU not meaningful,,,38,IoU not meaningful (<1% flood: 0.01%)
+Paraguay_651904,10.36%,0.00%,74.33%,73.15%,70.59%,Valid Evaluation,,,3981,
+Somalia_699062,1.62%,22.48%,3.15%,5.31%,8.55%,Valid Evaluation,#1,,738,Ranked #1 worst IoU
+Somalia_60129,0.30%,15.19%,0.12%,0.50%,0.44%,IoU not meaningful,,,181,IoU not meaningful (<1% flood: 0.30%)
+Somalia_685158,13.71%,29.74%,37.83%,31.60%,31.95%,Valid Evaluation,,,5248,
+Somalia_166342,0.01%,15.86%,0.00%,0.00%,0.00%,IoU not meaningful,,,720,IoU not meaningful (<1% flood: 0.01%)
+Somalia_94102,5.26%,7.93%,52.94%,51.52%,17.83%,Valid Evaluation,,,1954,
+Somalia_322855,17.54%,2.71%,57.97%,60.28%,59.82%,Valid Evaluation,,,4809,
+Spain_6860600,0.09%,0.07%,11.05%,14.30%,0.87%,IoU not meaningful,,,1120,IoU not meaningful (<1% flood: 0.09%)
+Spain_7558720,0.82%,0.06%,8.63%,8.57%,4.96%,IoU not meaningful,,,7779,IoU not meaningful (<1% flood: 0.82%)
+Spain_5650136,60.73%,34.54%,87.81%,87.85%,85.97%,Valid Evaluation,,,12386,
+Spain_7370579,26.73%,0.04%,62.02%,60.93%,59.23%,Valid Evaluation,,,14497,
+Spain_6095801,8.68%,0.03%,32.66%,32.56%,29.05%,Valid Evaluation,,#10,18018,Ranked #10 highest FP (18018 px)
+Spain_7387658,58.39%,0.03%,76.95%,76.40%,75.53%,Valid Evaluation,,#7,25521,Ranked #7 highest FP (25521 px)
+Sri-Lanka_117737,2.57%,0.00%,10.52%,10.14%,12.18%,Valid Evaluation,#8,,4399,Ranked #8 worst IoU
+Sri-Lanka_1049830,1.35%,27.43%,32.33%,30.51%,25.25%,Valid Evaluation,,,3815,
+Sri-Lanka_534068,98.14%,0.00%,98.73%,99.44%,81.10%,Valid Evaluation,,,2021,
+Sri-Lanka_922192,0.43%,8.53%,18.36%,18.68%,17.28%,IoU not meaningful,,,1608,IoU not meaningful (<1% flood: 0.43%)
+Sri-Lanka_377277,3.32%,1.05%,42.41%,45.98%,42.25%,Valid Evaluation,,,1723,
+Sri-Lanka_649970,6.65%,0.49%,13.77%,17.46%,22.65%,Valid Evaluation,,,615,
+Sri-Lanka_450918,4.31%,62.19%,3.18%,3.13%,3.40%,Valid Evaluation,#2,,0,Ranked #2 worst IoU
+Sri-Lanka_849649,0.87%,16.76%,41.66%,38.84%,48.58%,IoU not meaningful,,,70,IoU not meaningful (<1% flood: 0.87%)
+Sri-Lanka_713926,30.72%,0.02%,83.62%,71.83%,71.53%,Valid Evaluation,,,3584,
+USA_905409,16.97%,0.02%,91.53%,89.65%,59.80%,Valid Evaluation,,,3164,
+USA_430764,5.89%,0.00%,45.78%,35.82%,33.16%,Valid Evaluation,,,5985,
+USA_350244,0.49%,0.01%,20.26%,19.98%,2.60%,IoU not meaningful,,,956,IoU not meaningful (<1% flood: 0.49%)
+USA_527077,0.63%,0.01%,12.28%,25.30%,2.79%,IoU not meaningful,,,11334,IoU not meaningful (<1% flood: 0.63%)
+USA_933610,1.46%,0.04%,62.74%,64.68%,9.01%,Valid Evaluation,,,2454,
+USA_66511,1.04%,0.00%,13.13%,13.26%,6.97%,Valid Evaluation,#9,,969,Ranked #9 worst IoU
+USA_519181,0.82%,0.01%,33.65%,28.41%,5.40%,IoU not meaningful,,,2080,IoU not meaningful (<1% flood: 0.82%)
+USA_778194,1.46%,0.03%,49.52%,48.23%,6.31%,Valid Evaluation,,,5838,
+USA_67102,3.62%,0.02%,62.24%,67.42%,26.34%,Valid Evaluation,,,6860,
+USA_1049586,0.81%,0.03%,43.23%,45.92%,9.39%,IoU not meaningful,,,1435,IoU not meaningful (<1% flood: 0.81%)
+USA_595451,7.83%,0.00%,33.01%,33.01%,27.82%,Valid Evaluation,,#4,32827,Ranked #4 highest FP (32827 px)
+USA_670826,1.15%,0.00%,9.26%,9.00%,3.69%,Valid Evaluation,#7,,2149,Ranked #7 worst IoU
+USA_504150,1.24%,0.01%,42.88%,35.41%,6.78%,Valid Evaluation,,,1538,
+USA_758178,0.62%,0.00%,19.38%,22.75%,2.60%,IoU not meaningful,,,3324,IoU not meaningful (<1% flood: 0.62%)

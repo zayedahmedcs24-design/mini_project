@@ -84,6 +84,7 @@ def compute_metrics_from_counts(
     fn: int,
     tn: int,
     eps: float = 1e-7,
+    include_accuracy: bool = False,
 ) -> Dict[str, float]:
     """
     Calculates segmentation metrics from aggregated confusion matrix counts.
@@ -96,7 +97,7 @@ def compute_metrics_from_counts(
             - flood_f1: Dice / F1-Score for the flood class
             - flood_precision: Precision for the flood class
             - flood_recall: Recall for the flood class
-            - accuracy_valid: Raw accuracy on valid pixels (for trap illustration)
+            - accuracy_valid: Raw accuracy on valid pixels (only if include_accuracy=True)
     """
     flood_denom = tp + fp + fn
     flood_iou = (tp / (flood_denom + eps)) if flood_denom > 0 else 0.0
@@ -115,18 +116,21 @@ def compute_metrics_from_counts(
     f1_denom = 2 * tp + fp + fn
     flood_f1 = (2 * tp / (f1_denom + eps)) if f1_denom > 0 else 0.0
 
-    total_valid = tp + fp + fn + tn
-    accuracy_valid = (tp + tn) / (total_valid + eps) if total_valid > 0 else 0.0
-
-    return {
+    metrics = {
         "flood_iou": float(flood_iou),
         "nonflood_iou": float(nonflood_iou),
         "mean_iou": float(mean_iou),
         "flood_f1": float(flood_f1),
         "flood_precision": float(flood_precision),
         "flood_recall": float(flood_recall),
-        "accuracy_valid": float(accuracy_valid),
     }
+
+    if include_accuracy:
+        total_valid = tp + fp + fn + tn
+        accuracy_valid = (tp + tn) / (total_valid + eps) if total_valid > 0 else 0.0
+        metrics["accuracy_valid"] = float(accuracy_valid)
+
+    return metrics
 
 
 def evaluate_predictions(
@@ -134,6 +138,7 @@ def evaluate_predictions(
     y_true: Union[torch.Tensor, np.ndarray],
     threshold: float = 0.5,
     ignore_index: int = -1,
+    include_accuracy: bool = False,
 ) -> Dict[str, float]:
     """
     Direct end-to-end evaluation of predicted mask against ground truth.
@@ -149,6 +154,7 @@ def evaluate_predictions(
         fp=counts["fp"],
         fn=counts["fn"],
         tn=counts["tn"],
+        include_accuracy=include_accuracy,
     )
     metrics["valid_pixels"] = counts["valid_pixels"]
     metrics["tp"] = counts["tp"]

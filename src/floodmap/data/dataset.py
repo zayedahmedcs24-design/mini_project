@@ -144,10 +144,12 @@ class FloodDataset(Dataset):
 
         return item
 
-    def get_class_balance(self) -> Dict[str, Union[int, float]]:
+    def get_class_balance(self, verbose: bool = False) -> Dict[str, Union[int, float]]:
         """
         Computes the empirical class balance across all chips in the dataset.
-        Essential for Review-2 to prove why overall accuracy is misleading.
+        Reports both:
+          (a) flood % of valid (non-ignore) pixels, with valid_pixels denominator
+          (b) ignore % of total pixels, with total_pixels denominator
         """
         total_flood = 0
         total_land = 0
@@ -169,12 +171,19 @@ class FloodDataset(Dataset):
         pct_land_valid = (total_land / total_valid * 100.0) if total_valid > 0 else 0.0
         pct_ignore_total = (total_ignore / total_all * 100.0) if total_all > 0 else 0.0
 
+        if verbose:
+            print(f"(a) Flood % of valid pixels: {total_flood:,} / {total_valid:,} ({pct_flood_valid:.2f}%) [Denominator: {total_valid:,} valid non-ignore pixels]")
+            print(f"(b) Ignore % of total pixels: {total_ignore:,} / {total_all:,} ({pct_ignore_total:.2f}%) [Denominator: {total_all:,} total pixels]")
+
         return {
             "total_chips": len(self.samples),
             "flood_pixels": total_flood,
             "dry_land_pixels": total_land,
             "ignore_pixels": total_ignore,
             "valid_pixels": total_valid,
+            "total_pixels": total_all,
+            "denominator_valid_pixels": total_valid,
+            "denominator_total_pixels": total_all,
             "flood_pct_of_valid": pct_flood_valid,
             "dry_land_pct_of_valid": pct_land_valid,
             "ignore_pct_of_total": pct_ignore_total,

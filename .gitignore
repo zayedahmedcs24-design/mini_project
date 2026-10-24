@@ -27,6 +27,9 @@ wheels/
 *.pth
 *.pt
 *.ckpt
+results/checkpoints/
+results/smoke/
+results/logs/
 
 # Datasets and heavy geospatial rasters (DO NOT COMMIT)
 data/raw/

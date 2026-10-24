@@ -83,7 +83,12 @@ def test_predict_all_no_flood_trap():
     # Predict all 0s
     y_pred = np.zeros(1000, dtype=np.float32)
 
-    metrics = evaluate_predictions(y_pred, y_true, threshold=0.5)
+    # By default, accuracy_valid is omitted from metric outputs to prevent accuracy reporting
+    metrics_default = evaluate_predictions(y_pred, y_true, threshold=0.5)
+    assert "accuracy_valid" not in metrics_default
+
+    # For internal trap illustration only, include_accuracy=True includes it
+    metrics = evaluate_predictions(y_pred, y_true, threshold=0.5, include_accuracy=True)
 
     assert metrics["tp"] == 0
     assert metrics["fp"] == 0

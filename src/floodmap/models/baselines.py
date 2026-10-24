@@ -12,6 +12,7 @@ Therefore:
     pixels >  threshold  --> Dry Land (0)
 """
 
+from pathlib import Path
 from typing import Dict, Tuple, Optional, Union
 import numpy as np
 from skimage.filters import threshold_otsu
@@ -76,35 +77,57 @@ def otsu_segment_chip(
 class GlobalOtsuBaseline:
     """
     Calibrates a single global threshold from the training split histogram,
-    and applies it uniformly to validation and test chips.
+    using only non-ignored pixels and clipped values,
+    and applies it uniformly across evaluation splits.
     """
 
     def __init__(self, variant: str = "vh"):
-        self.variant = variant
+        self.variant = variant.lower()
+        if self.variant not in ["vv", "vh", "mean"]:
+            raise ValueError(f"Unknown variant '{variant}'. Must be 'vv', 'vh', or 'mean'.")
         self.global_threshold: Optional[float] = None
 
-    def fit(self, dataset) -> float:
+    def fit(self, dataset, max_samples_per_chip: int = 5000, seed: int = 42) -> float:
         """
-        Samples pixel values across dataset to compute a global Otsu threshold.
+        Samples non-ignored, clipped pixel values across the training split
+        to compute a single global Otsu threshold.
         """
+        rng = np.random.default_rng(seed)
         sampled_values = []
-        # Sample evenly across chips
-        step = max(1, len(dataset) // 50)
-        for idx in range(0, len(dataset), step):
-            s1, _, _ = dataset[idx]
+
+        for idx in range(len(dataset)):
+            # Check if underlying files exist if dataset provides sample paths
+            if hasattr(dataset, "samples") and idx < len(dataset.samples):
+                chip_id, s1_path, label_path = dataset.samples[idx]
+                if not Path(s1_path).exists() or not Path(label_path).exists():
+                    continue
+
+            s1, label, _ = dataset[idx]
             if isinstance(s1, torch.Tensor):
-                s1 = s1.numpy()
+                s1 = s1.detach().cpu().numpy()
+            if isinstance(label, torch.Tensor):
+                label = label.detach().cpu().numpy()
+
             if self.variant == "vv":
                 band = s1[0]
             elif self.variant == "vh":
                 band = s1[1]
-            else:
+            elif self.variant == "mean":
                 band = 0.5 * (s1[0] + s1[1])
-            valid = band[np.isfinite(band)]
-            if len(valid) > 0:
-                # Subsample 5,000 pixels per chip for speed
-                subsample = np.random.choice(valid, size=min(5000, len(valid)), replace=False)
+
+            # Filter out ignored pixels (-1) and non-finite values; values are already clipped
+            valid_mask = (label != -1) & np.isfinite(band)
+            valid_pixels = band[valid_mask]
+
+            if len(valid_pixels) > 0:
+                if len(valid_pixels) > max_samples_per_chip:
+                    subsample = rng.choice(valid_pixels, size=max_samples_per_chip, replace=False)
+                else:
+                    subsample = valid_pixels
                 sampled_values.append(subsample)
+
+        if not sampled_values:
+            raise RuntimeError("No valid pixels found across training dataset to fit GlobalOtsuBaseline.")
 
         all_vals = np.concatenate(sampled_values)
         self.global_threshold = float(threshold_otsu(all_vals))
@@ -119,3 +142,12 @@ class GlobalOtsuBaseline:
             threshold_override=self.global_threshold,
         )
         return mask
+
+    def segment(self, s1_chip: Union[np.ndarray, torch.Tensor]) -> Tuple[np.ndarray, float]:
+        if self.global_threshold is None:
+            raise RuntimeError("Global threshold has not been fitted. Call fit() first.")
+        return otsu_segment_chip(
+            s1_chip,
+            variant=self.variant,
+            threshold_override=self.global_threshold,
+        )

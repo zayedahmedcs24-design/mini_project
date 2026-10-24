@@ -16,15 +16,16 @@ data:
   test_split: "data/splits/flood_test_data.csv"
   bolivia_split: "data/splits/flood_bolivia_data.csv"
   image_size: 512
+  crop_size: 256
   ignore_index: -1
 
 training:
-  batch_size: 4
+  batch_size: 8
   gradient_accumulation_steps: 1
   learning_rate: 0.0003
   min_learning_rate: 0.000001
   weight_decay: 0.01
-  max_epochs: 30
+  max_epochs: 60
   early_stopping_patience: 8
   use_amp: true
   num_workers: 0
