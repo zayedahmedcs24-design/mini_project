@@ -82,11 +82,11 @@ Metrics show Mean ± Std across seeds 0, 1, 2.
 7. **Run2 Matched Training Recipe Eliminates Memory Bottleneck:**
    By matching the training recipe (batch size 8 with $256 \times 256$ random crops), DeepLabV3+ achieved full parity in training conditions with U-Net, consuming only **519.4 MB** peak VRAM with zero OOM issues. All runs converged comfortably under the 60-epoch cap (U-Net in 12–17 epochs; DeepLabV3+ in 17–40 epochs).
 
-8. **Regional Performance on Bolivia:**
-   We do not observe a systematic regional performance drop on the 15 Bolivia chips. DeepLabV3+ achieves $61.89 \pm 5.45\%$ and U-Net achieves $60.30 \pm 7.59\%$ Flood IoU, while Global Otsu Mean scores $64.81\%$. **Bolivia has a higher flood fraction; we did not investigate why Otsu performs well there.**
+8. **Regional Comparison on Bolivia:**
+   Bolivia means are 2–3.5 percentage points below test means for both models (U-Net: -3.51 percentage points, from 63.81% to 60.30%; DeepLabV3+: -2.38 percentage points, from 64.27% to 61.89%), within the large seed-to-seed spread; with 15 chips from one event we cannot conclude whether there is a regional drop. Flood fraction of valid pixels is 15.86% on Bolivia (454,864 / 2,867,815 valid pixels) vs. 12.51% on test (2,566,101 / 20,517,367 valid pixels); we did not investigate why Otsu performs well there.
 
-9. **Inter-Seed Stability Under Matched Recipe:**
-   We **do not** claim DeepLab is unstable because run2 demonstrates that when trained with the matched recipe and the 60-epoch cap, all 3 seeds converge stably (Bolivia Flood IoU: Seed 0: $56.26\%$, Seed 1: $62.27\%$, Seed 2: $67.14\%$; mean $61.89 \pm 5.45\%$). The collapse observed in run1 Seed 1 ($46.87\%$) was an artifact of premature termination at the old 30-epoch cap under batch size 4; when trained with the matched recipe, Seed 1 reached its validation peak at epoch 32 (stopping at epoch 40) and achieved $62.27\%$ on Bolivia without collapsing.
+9. **Inter-Seed Variation on Bolivia:**
+   On Bolivia, both models varied substantially between seeds (U-Net ±7.6, DeepLabV3+ ±5.5 IoU points; DeepLabV3+ seeds 56.3%, 62.3%, 67.1%). In run 1 the outlier DeepLabV3+ seed hit the 30-epoch cap; run 2 also changed the data recipe, so we cannot attribute the change to a single cause.
 
 10. **Near-Zero Flood Trap in Per-Chip Metric Distributions:**
     Per-chip evaluation indicates that chips with $< 1\%$ flood or $100\%$ ignore have mathematically unrepresentative IoU scores (marked as *"IoU not meaningful"*). Ranking the 10 worst test chips strictly among chips with $\ge 1\%$ flood isolates genuine model errors: missed narrow flood features (e.g., `Somalia_699062` at $3.15\%$ IoU) or heavy false positive alarms (e.g., `Pakistan_70625` with 44,647 false positive pixels). Dataset-level confusion matrix accumulation is mathematically required to eliminate small-sample divide-by-zero bias.

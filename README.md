@@ -120,8 +120,8 @@ Summary compiled from `results/metrics_summary_table.csv` and `results/metrics_s
 2. **Matched Data Recipe (Run 2):** Both U-Net and DeepLabV3+ were trained with batch size 8 on random $256 \times 256$ crops with `max_epochs = 60` and early stopping patience 8 on validation flood IoU. DeepLabV3+ operated at 519.4 MB peak VRAM without OOM.
 3. **In-Domain Comparisons:** Differences are **within seed-to-seed variation** on in-domain splits (Validation: $60.60\%$ vs $61.62\%$, a $+1.02$ percentage point difference; Test: $63.81\%$ vs $64.27\%$, a $+0.46$ percentage point difference).
 4. **Bolivia Regional Performance:** On the held-out Bolivia event, DeepLabV3+ achieves $61.89 \pm 5.45\%$ and U-Net achieves $60.30 \pm 7.59\%$ Flood IoU, while train-fitted Global Otsu Mean scores $64.81\%$.
-5. **Stability Under Matched Recipe:** We do not claim DeepLab is unstable; across all 3 seeds in run 2, DeepLab converges stably on Bolivia ($56.26\%$, $62.27\%$, $67.14\%$). None of the 6 runs hit the 60-epoch cap.
-6. **No Regional Drop Claim:** We do **not** claim a performance drop on Bolivia. Bolivia has a higher flood fraction; we did not investigate why Otsu performs well there.
+5. **Inter-Seed Variation on Bolivia:** On Bolivia, both models varied substantially between seeds (U-Net ±7.6, DeepLabV3+ ±5.5 IoU points; DeepLabV3+ seeds 56.3%, 62.3%, 67.1%). In run 1 the outlier DeepLabV3+ seed hit the 30-epoch cap; run 2 also changed the data recipe, so we cannot attribute the change to a single cause.
+6. **Regional Comparison on Bolivia:** Bolivia means are 2–3.5 percentage points below test means for both models (U-Net: -3.51 percentage points, from 63.81% to 60.30%; DeepLabV3+: -2.38 percentage points, from 64.27% to 61.89%), within the large seed-to-seed spread; with 15 chips from one event we cannot conclude whether there is a regional drop. Flood fraction of valid pixels is 15.86% on Bolivia (454,864 / 2,867,815) vs. 12.51% on test (2,566,101 / 20,517,367); we did not investigate why Otsu performs well there.
 7. **Test Suite Status:** **29 passed** out of 29 tests (`pytest tests/ -v`).
 
 ---

@@ -25,7 +25,7 @@
 * **SAR Interpretation Challenges:**
   * *Specular Reflection:* Flat surfaces (smooth asphalt, runways, calm soil) reflect radar pulses away, mimicking water.
   * *Terrain Shadows:* Mountain ridges cast dark radar shadows, creating false-positive water predictions.
-  * *Domain Shift:* Models trained on one region degrade severely when tested on unseen topographies (e.g., Bolivia).
+  * *Domain Shift:* Models trained on one region can degrade on unseen regions (literature to be cited in the survey table); on the held-out Bolivia event our models' scores varied widely between seeds.
   * *Silent Overconfidence:* Standard deep networks output uncalibrated, overconfident predictions without flagging uncertain pixels.
 
 ---
@@ -47,7 +47,7 @@
   * Most studies report in-distribution metrics on random splits; very few test on geographically held-out disaster events.
   * While uncertainty methods (MC Dropout, Ensembles) are occasionally implemented, few papers validate whether high-uncertainty pixels actually correspond to misclassifications.
   * Inundation maps are rarely integrated into downstream human exposure ranges (affected population and cut-off road networks).
-* **Formal Project Research Gap:**
+* **Candidate gap — to be confirmed by the literature table:**
   > "Few studies systematically evaluate whether predictive uncertainty remains well-calibrated under regional domain shift (such as the held-out Bolivia event in Sen1Floods11), nor do they propagate per-pixel uncertainty into bounded exposure intervals for disaster response."
 
 ---
@@ -141,8 +141,8 @@
   2. **Matched Run 2 Recipe:** Both models trained with batch size 8 on $256 \times 256$ random crops with `max_epochs = 60` and patience 8 early stopping. DeepLabV3+ peak VRAM is 519.4 MB (no OOM).
   3. **In-Domain Comparison:** U-Net and DeepLabV3+ show **differences within seed-to-seed variation** on in-domain splits (Validation: $60.60\%$ vs $61.62\%$, a $+1.02$ percentage points difference; Test: $63.81\%$ vs $64.27\%$, a $+0.46$ percentage points difference).
   4. **Regional Performance on Bolivia:** DeepLab achieves $61.89 \pm 5.45\%$ and U-Net achieves $60.30 \pm 7.59\%$ Flood IoU, while train-fitted Global Otsu Mean scores $64.81\%$.
-  5. **Model Stability Under Matched Recipe:** We do not claim DeepLab is unstable; across all 3 seeds in run 2, DeepLab converges stably on Bolivia ($56.26\%$, $62.27\%$, $67.14\%$). None of the 6 runs hit the 60-epoch cap (U-Net trained 12–17 epochs; DeepLab trained 17–40 epochs).
-  6. **No Regional Performance Drop:** We do **not** claim a performance drop on Bolivia. Bolivia has a higher flood fraction; we did not investigate why Otsu performs well there.
+  5. **Inter-Seed Variation on Bolivia:** On Bolivia, both models varied substantially between seeds (U-Net ±7.6, DeepLabV3+ ±5.5 IoU points; DeepLabV3+ seeds 56.3%, 62.3%, 67.1%). In run 1 the outlier DeepLabV3+ seed hit the 30-epoch cap; run 2 also changed the data recipe, so we cannot attribute the change to a single cause.
+  6. **Regional Comparison on Bolivia:** Bolivia means are 2–3.5 percentage points below test means for both models (U-Net: -3.51 pp; DeepLabV3+: -2.38 pp), within the large seed-to-seed spread; with 15 chips from one event we cannot conclude whether there is a regional drop. Flood fraction of valid pixels is 15.86% on Bolivia (454,864 / 2,867,815) vs. 12.51% on test (2,566,101 / 20,517,367); we did not investigate why Otsu performs well there.
 
 ---
 
