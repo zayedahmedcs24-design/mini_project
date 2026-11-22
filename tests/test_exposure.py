@@ -166,3 +166,59 @@ class TestExposureBrackets:
         assert pytest.approx(c_km, rel=1e-2) == 0.3
         assert pytest.approx(e_km, rel=1e-2) == 0.5
         assert pytest.approx(w_km, rel=1e-2) == 0.7
+
+
+class TestExposureIntegrationSyntheticRasters:
+    """
+    End-to-end integration test reading synthetic GeoTIFF flood mask and
+    synthetic GeoTIFF WorldPop population raster through rasterio and warp reprojection.
+    """
+
+    def test_compute_worldpop_exposure_end_to_end_synthetic_geotiffs(self, tmp_path):
+        import rasterio
+        from rasterio.transform import from_origin
+        from src.floodmap.exposure.worldpop import compute_worldpop_exposure
+
+        # 1. Create a synthetic WorldPop population GeoTIFF (10x10 cells, 50 people per cell)
+        # Origin at (lon=-65.0, lat=-14.0), cell size 0.001 deg (~100m)
+        wp_transform = from_origin(-65.0, -14.0, 0.001, 0.001)
+        wp_data = np.full((10, 10), 50.0, dtype=np.float32)
+        # Inject nodata values on first row
+        wp_data[0, :] = -99999.0
+
+        wp_file = tmp_path / "synthetic_worldpop.tif"
+        with rasterio.open(
+            wp_file,
+            "w",
+            driver="GTiff",
+            height=10,
+            width=10,
+            count=1,
+            dtype="float32",
+            crs="EPSG:4326",
+            transform=wp_transform,
+            nodata=-99999.0,
+        ) as dst:
+            dst.write(wp_data, 1)
+
+        # 2. Create a synthetic 10m Flood mask (100x100 pixels, res=0.0001 deg)
+        # Matching bounds, upper half inundated (rows 0 to 49)
+        flood_transform = from_origin(-65.0, -14.0, 0.0001, 0.0001)
+        flood_mask = np.zeros((100, 100), dtype=np.uint8)
+        flood_mask[:50, :] = 1  # 50% flooded
+
+        # 3. Execute compute_worldpop_exposure
+        res = compute_worldpop_exposure(
+            flood_mask=flood_mask,
+            flood_transform=flood_transform,
+            flood_crs="EPSG:4326",
+            worldpop_path=wp_file,
+        )
+
+        assert "exposed_population" in res
+        assert "total_population" in res
+        assert "exposure_percentage" in res
+        assert res["total_population"] > 0
+        assert res["exposed_population"] > 0
+        assert 0.0 < res["exposure_percentage"] <= 100.0
+

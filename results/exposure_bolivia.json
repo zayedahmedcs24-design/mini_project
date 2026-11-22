@@ -1,0 +1,1199 @@
+{
+  "metadata": {
+    "evaluation_date": "2026-11-22",
+    "dataset": "Sen1Floods11 Hand-Labeled Bolivia Split",
+    "split_csv": "data/splits/flood_bolivia_data.csv",
+    "num_chips": 15,
+    "worldpop_raster": "data\\worldpop\\bol_ppp_2018.tif",
+    "worldpop_year": 2018,
+    "worldpop_resolution_arcsec": 3.0,
+    "thresholds": {
+      "conservative": 0.7,
+      "expected": 0.5,
+      "worst_case": 0.3
+    },
+    "models_evaluated": [
+      "unet_resnet34",
+      "deeplabv3p_resnet34"
+    ],
+    "seeds_per_model": [
+      0,
+      1,
+      2
+    ],
+    "methodology": {
+      "area": "Local planar UTM projection derived dynamically per chip via geopandas.estimate_utm_crs()",
+      "population": "Fractional WorldPop aggregation (10m flood fraction inside 100m grid cell x cell population)",
+      "roads": "Geometric line-in-polygon intersection in planar metric UTM space via OpenStreetMap",
+      "assumptions": [
+        "Population is distributed uniformly within each 100m x 100m WorldPop grid cell.",
+        "Label -1 (ignore) pixels are treated as not-flood for exposure bounds.",
+        "Thresholds p>0.70 (conservative), p>0.50 (expected), p>0.30 (worst-case) are fixed a priori."
+      ]
+    }
+  },
+  "notes": "thresholds give a sensitivity range, not a statistical confidence interval; Bolivia is 15 chips from one event; WorldPop year differs from the 2018 event year; roads from OSM may be incomplete in rural areas.",
+  "totals": {
+    "ground_truth": {
+      "flooded_area_km2": 43.86439514200659,
+      "exposed_population": 19.18921018367473,
+      "total_footprint_population": 262.5534403026104,
+      "flooded_road_km": 0
+    },
+    "unet_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_area_km2": 29.81457676317416,
+        "exposed_population": 14.01840514689684,
+        "flooded_road_km": 0.0,
+        "relative_error_area_pct": -32.03011994887323,
+        "relative_error_pop_pct": -26.946419301701997,
+        "relative_error_road_pct": 0.0
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_area_km2": 39.67302082143766,
+        "exposed_population": 19.136785209178925,
+        "flooded_road_km": 0.0,
+        "relative_error_area_pct": -9.555299479224043,
+        "relative_error_pop_pct": -0.2732002724135444,
+        "relative_error_road_pct": 0.0
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_area_km2": 48.370722417167755,
+        "exposed_population": 24.318906916538253,
+        "flooded_road_km": 0.0,
+        "relative_error_area_pct": 10.273314519834088,
+        "relative_error_pop_pct": 26.732193163570766,
+        "relative_error_road_pct": 0.0
+      }
+    },
+    "deeplabv3p_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_area_km2": 30.508165536864652,
+        "exposed_population": 12.73741453513503,
+        "flooded_road_km": 0.0,
+        "relative_error_area_pct": -30.448908646528654,
+        "relative_error_pop_pct": -33.62199687628927,
+        "relative_error_road_pct": 0.0
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_area_km2": 41.23167328751651,
+        "exposed_population": 19.597730223089457,
+        "flooded_road_km": 0.0,
+        "relative_error_area_pct": -6.001956361114549,
+        "relative_error_pop_pct": 2.1289049184644115,
+        "relative_error_road_pct": 0.0
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_area_km2": 48.95968840226958,
+        "exposed_population": 24.285677209496498,
+        "flooded_road_km": 0.0,
+        "relative_error_area_pct": 11.616011673630702,
+        "relative_error_pop_pct": 26.559024457179582,
+        "relative_error_road_pct": 0.0
+      }
+    }
+  },
+  "per_chip": {
+    "Bolivia_103757": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.42107901219828,
+      "total_footprint_population": 17.378555297851562,
+      "ignore_fraction": 0.6640129089355469,
+      "ground_truth": {
+        "flooded_pixels": 35362,
+        "flooded_area_km2": 3.4096421960293557,
+        "exposed_population": 2.1692914962768555,
+        "exposure_percentage": 12.48257671076396,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 23282,
+          "flooded_area_km2": 2.2448755615620004,
+          "exposed_population": 1.4436148405075073,
+          "exposure_percentage": 8.306874856772332,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 29174,
+          "flooded_area_km2": 2.8129885591018726,
+          "exposed_population": 1.793715000152588,
+          "exposure_percentage": 10.321427583651543,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 33794,
+          "flooded_area_km2": 3.2584539441382288,
+          "exposed_population": 2.0647478103637695,
+          "exposure_percentage": 11.881009525682641,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 27052,
+          "flooded_area_km2": 2.608383029437988,
+          "exposed_population": 1.6621637344360352,
+          "exposure_percentage": 9.564452890059979,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 31543,
+          "flooded_area_km2": 3.0414100952817704,
+          "exposed_population": 1.9381128549575806,
+          "exposure_percentage": 11.15232435458649,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 35456,
+          "flooded_area_km2": 3.418705777456502,
+          "exposed_population": 2.1694140434265137,
+          "exposure_percentage": 12.48328187380863,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_129334": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.33813786535151,
+      "total_footprint_population": 7.946197986602783,
+      "ignore_fraction": 0.09281158447265625,
+      "ground_truth": {
+        "flooded_pixels": 156643,
+        "flooded_area_km2": 15.090694929642257,
+        "exposed_population": 4.727108955383301,
+        "exposure_percentage": 59.48894003589091,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 123581,
+          "flooded_area_km2": 11.905563415538005,
+          "exposed_population": 3.679621696472168,
+          "exposure_percentage": 46.30669538659842,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 146962,
+          "flooded_area_km2": 14.15804541696779,
+          "exposed_population": 4.428226470947266,
+          "exposure_percentage": 55.727613110234785,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 161015,
+          "flooded_area_km2": 15.511885268389573,
+          "exposed_population": 4.866520881652832,
+          "exposure_percentage": 61.2433882198473,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 128257,
+          "flooded_area_km2": 12.356040548196388,
+          "exposed_population": 3.867452383041382,
+          "exposure_percentage": 48.67047598816278,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 147553,
+          "flooded_area_km2": 14.214981256446212,
+          "exposed_population": 4.456048965454102,
+          "exposure_percentage": 56.07774904384411,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 160136,
+          "flooded_area_km2": 15.42720404520593,
+          "exposed_population": 4.838984966278076,
+          "exposure_percentage": 60.896858779966976,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_195474": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 95.93357477412137,
+      "total_footprint_population": 73.19163513183594,
+      "ignore_fraction": 0.003086090087890625,
+      "ground_truth": {
+        "flooded_pixels": 1551,
+        "flooded_area_km2": 0.14879297447466225,
+        "exposed_population": 0.39404475688934326,
+        "exposure_percentage": 0.5383740316493446,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 34,
+          "flooded_area_km2": 0.0032617415423201266,
+          "exposed_population": 0.009909337386488914,
+          "exposure_percentage": 0.013538893302000683,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 363,
+          "flooded_area_km2": 0.034823887643006056,
+          "exposed_population": 0.11150504648685455,
+          "exposure_percentage": 0.15234670777064463,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 895,
+          "flooded_area_km2": 0.08586054942283862,
+          "exposed_population": 0.2629830241203308,
+          "exposure_percentage": 0.3593074859533257,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 0,
+          "flooded_area_km2": 0.0,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 239,
+          "flooded_area_km2": 0.022928124371015008,
+          "exposed_population": 0.07255597412586212,
+          "exposure_percentage": 0.09913151140177585,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 790,
+          "flooded_area_km2": 0.07578752407155588,
+          "exposed_population": 0.23454594612121582,
+          "exposure_percentage": 0.3204545788582828,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_23014": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.64146282726247,
+      "total_footprint_population": 19.69292449951172,
+      "ignore_fraction": 0.20090103149414062,
+      "ground_truth": {
+        "flooded_pixels": 7780,
+        "flooded_area_km2": 0.751870580796102,
+        "exposed_population": 0.0313233882188797,
+        "exposure_percentage": 0.1590590987116025,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 33961,
+          "flooded_area_km2": 3.2820407190766607,
+          "exposed_population": 3.3678836822509766,
+          "exposure_percentage": 17.101998651010327,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 35129,
+          "flooded_area_km2": 3.3949179476589033,
+          "exposed_population": 3.4081826210021973,
+          "exposure_percentage": 17.306635289678294,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 35822,
+          "flooded_area_km2": 3.4618904813981963,
+          "exposed_population": 3.4488770961761475,
+          "exposure_percentage": 17.513280448831566,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 17532,
+          "flooded_area_km2": 1.6943181262875657,
+          "exposed_population": 1.3458120822906494,
+          "exposure_percentage": 6.833987924566605,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 34621,
+          "flooded_area_km2": 3.345824084542654,
+          "exposed_population": 3.3826584815979004,
+          "exposure_percentage": 17.177024578963742,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 35283,
+          "flooded_area_km2": 3.409800732934302,
+          "exposed_population": 3.4207277297973633,
+          "exposure_percentage": 17.37033892493814,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_233925": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.92552183808057,
+      "total_footprint_population": 10.995142936706543,
+      "ignore_fraction": 0.4257469177246094,
+      "ground_truth": {
+        "flooded_pixels": 1,
+        "flooded_area_km2": 9.692552183808057e-05,
+        "exposed_population": 4.062911102664657e-05,
+        "exposure_percentage": 0.0003695187162234064,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 5013,
+          "flooded_area_km2": 0.48588764097429793,
+          "exposed_population": 0.20496705174446106,
+          "exposure_percentage": 1.8641599561220108,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 5191,
+          "flooded_area_km2": 0.5031403838614762,
+          "exposed_population": 0.2123498171567917,
+          "exposure_percentage": 1.9313056535888784,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 5412,
+          "flooded_area_km2": 0.5245609241876921,
+          "exposed_population": 0.22149741649627686,
+          "exposure_percentage": 2.014502383200701,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 4794,
+          "flooded_area_km2": 0.46466095169175825,
+          "exposed_population": 0.19602328538894653,
+          "exposure_percentage": 1.7828170722050007,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 5008,
+          "flooded_area_km2": 0.4854030133651075,
+          "exposed_population": 0.204757422208786,
+          "exposure_percentage": 1.8622533912243846,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 5165,
+          "flooded_area_km2": 0.5006203202936862,
+          "exposed_population": 0.21127498149871826,
+          "exposure_percentage": 1.9215301039278987,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_242570": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.81212936386426,
+      "total_footprint_population": 28.356327056884766,
+      "ignore_fraction": 0.3304939270019531,
+      "ground_truth": {
+        "flooded_pixels": 27346,
+        "flooded_area_km2": 2.6474244895842323,
+        "exposed_population": 3.2368149757385254,
+        "exposure_percentage": 11.414789261124154,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 11155,
+          "flooded_area_km2": 1.0799393030539057,
+          "exposed_population": 1.3043984174728394,
+          "exposure_percentage": 4.6000260007444735,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 22162,
+          "flooded_area_km2": 2.1455504109619596,
+          "exposed_population": 2.6757686138153076,
+          "exposure_percentage": 9.436231316021745,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 38603,
+          "flooded_area_km2": 3.737238629833252,
+          "exposed_population": 4.72204065322876,
+          "exposure_percentage": 16.652511602634632,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 5754,
+          "flooded_area_km2": 0.557056992359675,
+          "exposed_population": 0.7035316228866577,
+          "exposure_percentage": 2.4810393161121476,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 18051,
+          "flooded_area_km2": 1.7475557471471137,
+          "exposed_population": 2.2806527614593506,
+          "exposure_percentage": 8.04283557910798,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 34453,
+          "flooded_area_km2": 3.3354682929732156,
+          "exposed_population": 4.261500835418701,
+          "exposure_percentage": 15.028394992305715,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_290290": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.85689328388284,
+      "total_footprint_population": 33.57985305786133,
+      "ignore_fraction": 0.21938705444335938,
+      "ground_truth": {
+        "flooded_pixels": 19699,
+        "flooded_area_km2": 1.907983940799208,
+        "exposed_population": 2.348414182662964,
+        "exposure_percentage": 6.993521319513875,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 9315,
+          "flooded_area_km2": 0.9022219609393687,
+          "exposed_population": 1.1110889911651611,
+          "exposure_percentage": 3.30879646569819,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 17010,
+          "flooded_area_km2": 1.6475357547588472,
+          "exposed_population": 1.9792371988296509,
+          "exposure_percentage": 5.894121083315148,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 23141,
+          "flooded_area_km2": 2.2413653674823326,
+          "exposed_population": 2.709512710571289,
+          "exposure_percentage": 8.068864107006474,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 14828,
+          "flooded_area_km2": 1.4361940136134148,
+          "exposed_population": 1.7758502960205078,
+          "exposure_percentage": 5.288439746774789,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 19879,
+          "flooded_area_km2": 1.9254181815903069,
+          "exposed_population": 2.3548479080200195,
+          "exposure_percentage": 7.012680799890307,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 24205,
+          "flooded_area_km2": 2.3444211019363843,
+          "exposed_population": 2.85597562789917,
+          "exposure_percentage": 8.505027175008921,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_294583": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 97.16129281480488,
+      "total_footprint_population": 0.4320490062236786,
+      "ignore_fraction": 0.502288818359375,
+      "ground_truth": {
+        "flooded_pixels": 15008,
+        "flooded_area_km2": 1.4581966825645918,
+        "exposed_population": 0.024356838315725327,
+        "exposure_percentage": 5.637517495669324,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 7368,
+          "flooded_area_km2": 0.7158844054594824,
+          "exposed_population": 0.01246565394103527,
+          "exposure_percentage": 2.885240739237253,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 12538,
+          "flooded_area_km2": 1.2182082893120236,
+          "exposed_population": 0.023287687450647354,
+          "exposure_percentage": 5.390056941501435,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 17619,
+          "flooded_area_km2": 1.7118848181040474,
+          "exposed_population": 0.03550908714532852,
+          "exposure_percentage": 8.218763759161364,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 16089,
+          "flooded_area_km2": 1.563228040097396,
+          "exposed_population": 0.044601939618587494,
+          "exposure_percentage": 10.323351975376694,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 17803,
+          "flooded_area_km2": 1.7297624959819715,
+          "exposed_population": 0.0489431731402874,
+          "exposure_percentage": 11.328153157456574,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 19518,
+          "flooded_area_km2": 1.8963941131593618,
+          "exposed_population": 0.052410319447517395,
+          "exposure_percentage": 12.13064228653352,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_312675": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.21781706685225,
+      "total_footprint_population": 14.782217025756836,
+      "ignore_fraction": 0.397247314453125,
+      "ground_truth": {
+        "flooded_pixels": 9575,
+        "flooded_area_km2": 0.9212855984151103,
+        "exposed_population": 0.42263713479042053,
+        "exposure_percentage": 2.8590916643559554,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 441,
+          "flooded_area_km2": 0.042432057326481844,
+          "exposed_population": 0.01960020139813423,
+          "exposure_percentage": 0.13259311078969035,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 1212,
+          "flooded_area_km2": 0.11661599428502492,
+          "exposed_population": 0.052401985973119736,
+          "exposure_percentage": 0.3544934151745536,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 2837,
+          "flooded_area_km2": 0.27296994701865984,
+          "exposed_population": 0.12200579047203064,
+          "exposure_percentage": 0.8253551565333216,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 1080,
+          "flooded_area_km2": 0.10391524243220043,
+          "exposed_population": 0.045451004058122635,
+          "exposure_percentage": 0.3074708210475322,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 2056,
+          "flooded_area_km2": 0.19782383188944822,
+          "exposed_population": 0.08689259737730026,
+          "exposure_percentage": 0.5878184390467062,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 3742,
+          "flooded_area_km2": 0.3600470714641611,
+          "exposed_population": 0.16177546977996826,
+          "exposure_percentage": 1.0943924683157296,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_314919": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.36592020612183,
+      "total_footprint_population": 7.575310707092285,
+      "ignore_fraction": 0.2796134948730469,
+      "ground_truth": {
+        "flooded_pixels": 83678,
+        "flooded_area_km2": 8.063707471007861,
+        "exposed_population": 2.3776156902313232,
+        "exposure_percentage": 31.386378488809864,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 48792,
+          "flooded_area_km2": 4.701885978697096,
+          "exposed_population": 1.3406212329864502,
+          "exposure_percentage": 17.69724417681391,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 66505,
+          "flooded_area_km2": 6.408815523308132,
+          "exposed_population": 1.855716586112976,
+          "exposure_percentage": 24.496903927327836,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 79867,
+          "flooded_area_km2": 7.696456949102331,
+          "exposed_population": 2.254840135574341,
+          "exposure_percentage": 29.76564556570962,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 51536,
+          "flooded_area_km2": 4.966314063742694,
+          "exposed_population": 1.4419143199920654,
+          "exposure_percentage": 19.034391799165306,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 71173,
+          "flooded_area_km2": 6.858651638830309,
+          "exposed_population": 2.0053911209106445,
+          "exposure_percentage": 26.472724333711135,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 83233,
+          "flooded_area_km2": 8.020824636516137,
+          "exposed_population": 2.3561880588531494,
+          "exposure_percentage": 31.10351706956652,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_360519": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.65975151199811,
+      "total_footprint_population": 8.093957901000977,
+      "ignore_fraction": 0.030719757080078125,
+      "ground_truth": {
+        "flooded_pixels": 2801,
+        "flooded_area_km2": 0.2707439639851067,
+        "exposed_population": 0.07103930413722992,
+        "exposure_percentage": 0.8776831434772415,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 11051,
+          "flooded_area_km2": 1.0681869139590912,
+          "exposed_population": 0.26436394453048706,
+          "exposure_percentage": 3.2661887764179407,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 11457,
+          "flooded_area_km2": 1.1074307730729624,
+          "exposed_population": 0.2697891891002655,
+          "exposure_percentage": 3.3332171034260107,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 11946,
+          "flooded_area_km2": 1.1546973915623293,
+          "exposed_population": 0.28273916244506836,
+          "exposure_percentage": 3.4932126643517893,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 8916,
+          "flooded_area_km2": 0.8618183444809752,
+          "exposed_population": 0.19617119431495667,
+          "exposure_percentage": 2.423674507754683,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 11014,
+          "flooded_area_km2": 1.0646105031531472,
+          "exposed_population": 0.2582330107688904,
+          "exposure_percentage": 3.1904417335424347,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 11211,
+          "flooded_area_km2": 1.0836524742010107,
+          "exposed_population": 0.26276975870132446,
+          "exposure_percentage": 3.246492777888403,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_379434": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.04847449162133,
+      "total_footprint_population": 11.649602890014648,
+      "ignore_fraction": 0.0,
+      "ground_truth": {
+        "flooded_pixels": 10790,
+        "flooded_area_km2": 1.0363630397645942,
+        "exposed_population": 0.4774816930294037,
+        "exposure_percentage": 4.098695015936318,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 2918,
+          "flooded_area_km2": 0.28026944856655106,
+          "exposed_population": 0.12778781354427338,
+          "exposure_percentage": 1.096928494050261,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 6133,
+          "flooded_area_km2": 0.5890652940571137,
+          "exposed_population": 0.2655505836009979,
+          "exposure_percentage": 2.2794818510819126,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 10918,
+          "flooded_area_km2": 1.0486572444995217,
+          "exposed_population": 0.4750044643878937,
+          "exposure_percentage": 4.077430525936978,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 6202,
+          "flooded_area_km2": 0.5956926387970356,
+          "exposed_population": 0.26570573449134827,
+          "exposure_percentage": 2.2808136637781495,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 10106,
+          "flooded_area_km2": 0.9706658832123253,
+          "exposed_population": 0.4354170262813568,
+          "exposure_percentage": 3.7376126069891242,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 14401,
+          "flooded_area_km2": 1.383194081153839,
+          "exposed_population": 0.6231619119644165,
+          "exposure_percentage": 5.349211624188101,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_432776": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.34127147233957,
+      "total_footprint_population": 10.38487720489502,
+      "ignore_fraction": 0.4015159606933594,
+      "ground_truth": {
+        "flooded_pixels": 72145,
+        "flooded_area_km2": 6.950541030371938,
+        "exposed_population": 2.681363821029663,
+        "exposure_percentage": 25.819889519403986,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 28100,
+          "flooded_area_km2": 2.7071897283727417,
+          "exposed_population": 1.0290136337280273,
+          "exposure_percentage": 9.908770353519357,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 51418,
+          "flooded_area_km2": 4.953675496564756,
+          "exposed_population": 1.9135115146636963,
+          "exposure_percentage": 18.425942617422024,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 70492,
+          "flooded_area_km2": 6.791288908628161,
+          "exposed_population": 2.653263568878174,
+          "exposure_percentage": 25.549301320843064,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 28872,
+          "flooded_area_km2": 2.781565189949388,
+          "exposed_population": 1.0591012239456177,
+          "exposure_percentage": 10.198495399121324,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 50926,
+          "flooded_area_km2": 4.906275591000365,
+          "exposed_population": 1.900681734085083,
+          "exposure_percentage": 18.3023996970246,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 70187,
+          "flooded_area_km2": 6.7619048208290975,
+          "exposed_population": 2.6362075805664062,
+          "exposure_percentage": 25.385062611272886,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_60373": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.68002156821409,
+      "total_footprint_population": 6.378983020782471,
+      "ignore_fraction": 0.24080276489257812,
+      "ground_truth": {
+        "flooded_pixels": 12480,
+        "flooded_area_km2": 1.2065666691713117,
+        "exposed_population": 0.2274468094110489,
+        "exposure_percentage": 3.5655653678656347,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 4085,
+          "flooded_area_km2": 0.39493788810615454,
+          "exposed_population": 0.10306864976882935,
+          "exposure_percentage": 1.6157536308379536,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 6022,
+          "flooded_area_km2": 0.5822070898837852,
+          "exposed_population": 0.14754289388656616,
+          "exposure_percentage": 2.3129532310381973,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 9003,
+          "flooded_area_km2": 0.8704102341786314,
+          "exposed_population": 0.19787365198135376,
+          "exposure_percentage": 3.1019623557029288,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 5368,
+          "flooded_area_km2": 0.5189783557781732,
+          "exposed_population": 0.1336357146501541,
+          "exposure_percentage": 2.094937613327615,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 7451,
+          "flooded_area_km2": 0.7203628407047631,
+          "exposed_population": 0.1725371927022934,
+          "exposure_percentage": 2.7047758575336247,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 9740,
+          "flooded_area_km2": 0.9416634100744051,
+          "exposed_population": 0.20073997974395752,
+          "exposure_percentage": 3.146896285661127,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    },
+    "Bolivia_76104": {
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32720",
+      "pixel_area_m2": 96.92997568626245,
+      "total_footprint_population": 12.115806579589844,
+      "ignore_fraction": 0.2715263366699219,
+      "ground_truth": {
+        "flooded_pixels": 5,
+        "flooded_area_km2": 0.00048464987843131226,
+        "exposed_population": 0.00023050844902172685,
+        "exposure_percentage": 0.0019025431572177696,
+        "flooded_road_km": null,
+        "total_road_km": null
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 0,
+          "flooded_area_km2": 0.0,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 0,
+          "flooded_area_km2": 0.0,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 32,
+          "flooded_area_km2": 0.0031017592219603984,
+          "exposed_population": 0.0014914630446583033,
+          "exposure_percentage": 0.0123100598780671,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 0,
+          "flooded_area_km2": 0.0,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 0,
+          "flooded_area_km2": 0.0,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": null,
+          "total_road_km": null
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 0,
+          "flooded_area_km2": 0.0,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": null,
+          "total_road_km": null
+        }
+      }
+    }
+  }
+}

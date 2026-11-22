@@ -30,6 +30,8 @@ wheels/
 results/checkpoints/
 results/smoke/
 results/logs/
+results/uncertainty/
+*.npy
 
 # Datasets and heavy geospatial rasters (DO NOT COMMIT)
 data/raw/
