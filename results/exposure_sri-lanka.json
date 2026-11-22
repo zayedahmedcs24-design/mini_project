@@ -1,0 +1,901 @@
+{
+  "metadata": {
+    "evaluation_date": "2026-11-22",
+    "country": "Sri-Lanka",
+    "event_key": "sri-lanka",
+    "event_year": "Event year not verified locally",
+    "event_date": "Event year not verified locally in dataset files",
+    "split_csv": "data/splits/flood_test_data.csv",
+    "split_type": "Sen1Floods11 Official TEST Split (Unseen During Training)",
+    "num_chips": 9,
+    "worldpop_raster": "data/worldpop/lka_ppp_2020_constrained.tif",
+    "worldpop_year": 2020,
+    "osm_shapefile": "data/osm/sri-lanka/gis_osm_roads_free_1.shp",
+    "osm_extract_date": "2026-11-22 (Geofabrik Asia / Sri-Lanka latest extract)",
+    "thresholds": {
+      "conservative": 0.7,
+      "expected": 0.5,
+      "worst_case": 0.3
+    },
+    "models_evaluated": [
+      "unet_resnet34",
+      "deeplabv3p_resnet34"
+    ],
+    "seeds_per_model": [
+      0,
+      1,
+      2
+    ],
+    "methodology": {
+      "area": "Local planar UTM projection derived dynamically per chip via geopandas.estimate_utm_crs()",
+      "population": "Fractional WorldPop aggregation (10m flood fraction inside 100m grid cell x cell population)",
+      "roads": "Geometric line-in-polygon intersection in planar metric UTM space via local Geofabrik shapefile",
+      "assumptions": [
+        "Population is distributed uniformly within each 100m x 100m WorldPop grid cell.",
+        "Label -1 (ignore) pixels are treated as not-flood for exposure bounds.",
+        "Thresholds p>0.70 (conservative), p>0.50 (expected), p>0.30 (worst-case) are fixed a priori."
+      ]
+    }
+  },
+  "notes": "Thresholds give an operational sensitivity range, not a statistical confidence interval. WorldPop year is 2020 whereas event year is Event year not verified locally. Roads were evaluated using official local Geofabrik shapefile extracts (offline); missing roads in a chip indicate that no road features exist within that specific chip bounding box in the extract (distinct from mapped roads that remain unflooded). Small sample size caveat applies (9 chips evaluated).",
+  "totals": {
+    "ground_truth": {
+      "num_chips": 9,
+      "total_footprint_area_km2": 232.53718140907975,
+      "total_footprint_population": 65032.7255859375,
+      "implied_population_density_per_km2": 279.6659234960444,
+      "flooded_area_km2": 37.40307762762058,
+      "exposed_population": 1648.9166202545166,
+      "flooded_road_km": 4.400946291448152,
+      "total_road_km": 747.7860831966465,
+      "chips_with_roads_in_extract": 9,
+      "road_status": "mapped across 9/9 chips"
+    },
+    "unet_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_area_km2": 31.436223675480317,
+        "exposed_population": 586.1477870941162,
+        "flooded_road_km": 1.7034109747232289,
+        "total_road_km": 747.7860831966465,
+        "relative_error_area_pct": -15.952842200701681,
+        "relative_error_pop_pct": -64.45255145747502,
+        "relative_error_road_pct": -61.29443847035193,
+        "chips_with_roads_in_extract": 9
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_area_km2": 35.98433438110821,
+        "exposed_population": 1240.6632616519928,
+        "flooded_road_km": 5.79041460042448,
+        "total_road_km": 747.7860831966465,
+        "relative_error_area_pct": -3.793119006508408,
+        "relative_error_pop_pct": -24.758884323666308,
+        "relative_error_road_pct": 31.572035125180246,
+        "chips_with_roads_in_extract": 9
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_area_km2": 39.4974377176426,
+        "exposed_population": 2069.5449085235596,
+        "flooded_road_km": 11.394193475092814,
+        "total_road_km": 747.7860831966465,
+        "relative_error_area_pct": 5.599432514279036,
+        "relative_error_pop_pct": 25.50937282711829,
+        "relative_error_road_pct": 158.9032612652835,
+        "chips_with_roads_in_extract": 9
+      }
+    },
+    "deeplabv3p_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_area_km2": 31.626927000630882,
+        "exposed_population": 642.3368816375732,
+        "flooded_road_km": 1.6192524495758278,
+        "total_road_km": 747.7860831966465,
+        "relative_error_area_pct": -15.44298221792385,
+        "relative_error_pop_pct": -61.04491435483099,
+        "relative_error_road_pct": -63.20672095630131,
+        "chips_with_roads_in_extract": 9
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_area_km2": 36.70844567383958,
+        "exposed_population": 1307.3132820129395,
+        "flooded_road_km": 5.509586360783705,
+        "total_road_km": 747.7860831966465,
+        "relative_error_area_pct": -1.8571518651397,
+        "relative_error_pop_pct": -20.716835165919388,
+        "relative_error_road_pct": 25.1909474898579,
+        "chips_with_roads_in_extract": 9
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_area_km2": 39.682120318133286,
+        "exposed_population": 2189.936061859131,
+        "flooded_road_km": 12.981261590838562,
+        "total_road_km": 747.7860831966465,
+        "relative_error_area_pct": 6.0931956273826176,
+        "relative_error_pop_pct": 32.81060030319215,
+        "relative_error_road_pct": 194.9652354554642,
+        "chips_with_roads_in_extract": 9
+      }
+    }
+  },
+  "per_chip": {
+    "Sri-Lanka_117737": {
+      "centroid": {
+        "lat": 7.841933104249773,
+        "lon": 81.15595872403946
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.781384028881295,
+      "pixel_area_m2": 98.34817515900153,
+      "total_footprint_population": 11846.4931640625,
+      "implied_population_density_per_km2": 459.49795211892445,
+      "ignore_fraction": 0.0,
+      "ground_truth": {
+        "flooded_pixels": 6731,
+        "flooded_area_km2": 0.6619815669952392,
+        "exposed_population": 447.318115234375,
+        "exposure_percentage": 3.7759538543554685,
+        "flooded_road_km": 2.0900777473141705,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 2215,
+          "flooded_area_km2": 0.21784120797718837,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.01381014940276134,
+          "total_road_km": 92.44590512181287,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 7640,
+          "flooded_area_km2": 0.7513800582147716,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.24923188616654277,
+          "total_road_km": 92.44590512181287,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 18121,
+          "flooded_area_km2": 1.7821672820562666,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.8674896254078294,
+          "total_road_km": 92.44590512181287,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 3130,
+          "flooded_area_km2": 0.30782978824767476,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.22920593807729353,
+          "total_road_km": 92.44590512181287,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 7718,
+          "flooded_area_km2": 0.7590512158771737,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.3994498923690255,
+          "total_road_km": 92.44590512181287,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 18105,
+          "flooded_area_km2": 1.7805937112537225,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 1.154582984146296,
+          "total_road_km": 92.44590512181287,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_1049830": {
+      "centroid": {
+        "lat": 6.23215211510759,
+        "lon": 81.10996498149254
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.868499151529516,
+      "pixel_area_m2": 98.68049297916228,
+      "total_footprint_population": 1806.001953125,
+      "implied_population_density_per_km2": 69.8147172182665,
+      "ignore_fraction": 0.2743186950683594,
+      "ground_truth": {
+        "flooded_pixels": 2577,
+        "flooded_area_km2": 0.2542996304073012,
+        "exposed_population": 7.646829605102539,
+        "exposure_percentage": 0.4234120340717746,
+        "flooded_road_km": 0.10352011245863872,
+        "total_road_km": 56.99692094996794,
+        "road_status": "roads flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 3852,
+          "flooded_area_km2": 0.3801172589557331,
+          "exposed_population": 16.616802215576172,
+          "exposure_percentage": 0.9200877212133369,
+          "flooded_road_km": 0.298352146479466,
+          "total_road_km": 56.99692094996794,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 5677,
+          "flooded_area_km2": 0.5602091586427043,
+          "exposed_population": 52.6662483215332,
+          "exposure_percentage": 2.9161789238601106,
+          "flooded_road_km": 1.4037421860247123,
+          "total_road_km": 56.99692094996794,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 7487,
+          "flooded_area_km2": 0.738820850934988,
+          "exposed_population": 79.54922485351562,
+          "exposure_percentage": 4.40471422059474,
+          "flooded_road_km": 2.15048683000202,
+          "total_road_km": 56.99692094996794,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 4653,
+          "flooded_area_km2": 0.4591603338320421,
+          "exposed_population": 30.681703567504883,
+          "exposure_percentage": 1.6988743292561261,
+          "flooded_road_km": 0.13103931069117739,
+          "total_road_km": 56.99692094996794,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 5899,
+          "flooded_area_km2": 0.5821162280840783,
+          "exposed_population": 54.82521057128906,
+          "exposure_percentage": 3.03572266222762,
+          "flooded_road_km": 0.6774144692254178,
+          "total_road_km": 56.99692094996794,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 7306,
+          "flooded_area_km2": 0.7209596817057596,
+          "exposed_population": 77.89484405517578,
+          "exposure_percentage": 4.31310962429421,
+          "flooded_road_km": 2.282523588969215,
+          "total_road_km": 56.99692094996794,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_534068": {
+      "centroid": {
+        "lat": 7.979914331890532,
+        "lon": 81.56990240696173
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.77531342736682,
+      "pixel_area_m2": 98.32501765200357,
+      "total_footprint_population": 138.678955078125,
+      "implied_population_density_per_km2": 5.380301406185162,
+      "ignore_fraction": 0.0,
+      "ground_truth": {
+        "flooded_pixels": 257268,
+        "flooded_area_km2": 25.295880641295653,
+        "exposed_population": 58.22542953491211,
+        "exposure_percentage": 41.985771743168044,
+        "flooded_road_km": 0.0,
+        "total_road_km": 0.8635022925795021,
+        "road_status": "roads mapped but not flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 251132,
+          "flooded_area_km2": 24.69255833298296,
+          "exposed_population": 39.45489501953125,
+          "exposure_percentage": 28.45052805402541,
+          "flooded_road_km": 0.015446458897136452,
+          "total_road_km": 0.8635022925795021,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 255927,
+          "flooded_area_km2": 25.164026792624316,
+          "exposed_population": 60.01422882080078,
+          "exposure_percentage": 43.27565692068539,
+          "flooded_road_km": 0.16384725602004788,
+          "total_road_km": 0.8635022925795021,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 258969,
+          "flooded_area_km2": 25.46313149632171,
+          "exposed_population": 86.00872802734375,
+          "exposure_percentage": 62.02002890697482,
+          "flooded_road_km": 0.43734984712513414,
+          "total_road_km": 0.8635022925795021,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 256519,
+          "flooded_area_km2": 25.222235203074302,
+          "exposed_population": 46.16782760620117,
+          "exposure_percentage": 33.29115623938215,
+          "flooded_road_km": 0.05107291927928681,
+          "total_road_km": 0.8635022925795021,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 257420,
+          "flooded_area_km2": 25.310826043978757,
+          "exposed_population": 56.639503479003906,
+          "exposure_percentage": 40.84217641176771,
+          "flooded_road_km": 0.11483606816709538,
+          "total_road_km": 0.8635022925795021,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 258194,
+          "flooded_area_km2": 25.386929607641406,
+          "exposed_population": 69.5907974243164,
+          "exposure_percentage": 50.181224242072155,
+          "flooded_road_km": 0.43172388958085045,
+          "total_road_km": 0.8635022925795021,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_922192": {
+      "centroid": {
+        "lat": 6.416127085295269,
+        "lon": 81.33993369422714
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.860348697504623,
+      "pixel_area_m2": 98.64940146447992,
+      "total_footprint_population": 9143.16015625,
+      "implied_population_density_per_km2": 353.5590437391226,
+      "ignore_fraction": 0.08530044555664062,
+      "ground_truth": {
+        "flooded_pixels": 1030,
+        "flooded_area_km2": 0.10160888350841431,
+        "exposed_population": 1.3258781433105469,
+        "exposure_percentage": 0.014501311588687582,
+        "flooded_road_km": 0.0,
+        "total_road_km": 82.31779389330951,
+        "road_status": "roads mapped but not flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 1770,
+          "flooded_area_km2": 0.17460944059212946,
+          "exposed_population": 3.1161231994628906,
+          "exposure_percentage": 0.03408146796305213,
+          "flooded_road_km": 0.0,
+          "total_road_km": 82.31779389330951,
+          "road_status": "roads mapped but not flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 3884,
+          "flooded_area_km2": 0.38315427528803997,
+          "exposed_population": 13.116013526916504,
+          "exposure_percentage": 0.14345164366338672,
+          "flooded_road_km": 0.06952409156345273,
+          "total_road_km": 82.31779389330951,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 5613,
+          "flooded_area_km2": 0.5537190904201258,
+          "exposed_population": 33.31433868408203,
+          "exposure_percentage": 0.3643635035891755,
+          "flooded_road_km": 0.18870825696973972,
+          "total_road_km": 82.31779389330951,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 1914,
+          "flooded_area_km2": 0.18881495440301455,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.07945610633583866,
+          "total_road_km": 82.31779389330951,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 3630,
+          "flooded_area_km2": 0.3580973273160621,
+          "exposed_population": 4.4106831550598145,
+          "exposure_percentage": 0.048240248225825934,
+          "flooded_road_km": 0.15891194691562252,
+          "total_road_km": 82.31779389330951,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 5529,
+          "flooded_area_km2": 0.5454325406971094,
+          "exposed_population": 11.607348442077637,
+          "exposure_percentage": 0.12695116615826957,
+          "flooded_road_km": 0.2383678680107904,
+          "total_road_km": 82.31779389330951,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_377277": {
+      "centroid": {
+        "lat": 6.27814585765451,
+        "lon": 81.0179774963987
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.86619111800604,
+      "pixel_area_m2": 98.6716885299913,
+      "total_footprint_population": 6714.5576171875,
+      "implied_population_density_per_km2": 259.58818546397214,
+      "ignore_fraction": 0.0105133056640625,
+      "ground_truth": {
+        "flooded_pixels": 8603,
+        "flooded_area_km2": 0.8488725364235151,
+        "exposed_population": 162.4396209716797,
+        "exposure_percentage": 2.419215534853361,
+        "flooded_road_km": 0.47299756325231135,
+        "total_road_km": 139.80743903674738,
+        "road_status": "roads flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 4448,
+          "flooded_area_km2": 0.4388916705814013,
+          "exposed_population": 109.66847229003906,
+          "exposure_percentage": 1.633294083430257,
+          "flooded_road_km": 1.3037328762316576,
+          "total_road_km": 139.80743903674738,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 7514,
+          "flooded_area_km2": 0.7414190676143546,
+          "exposed_population": 169.55838012695312,
+          "exposure_percentage": 2.5252353139829835,
+          "flooded_road_km": 3.606262232262341,
+          "total_road_km": 139.80743903674738,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 10815,
+          "flooded_area_km2": 1.0671343114518559,
+          "exposed_population": 207.33670043945312,
+          "exposure_percentage": 3.087868363936974,
+          "flooded_road_km": 5.8013739625965215,
+          "total_road_km": 139.80743903674738,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 5656,
+          "flooded_area_km2": 0.5580870703256308,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.92283024903358,
+          "total_road_km": 139.80743903674738,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 7959,
+          "flooded_area_km2": 0.7853279690102007,
+          "exposed_population": 137.48875427246094,
+          "exposure_percentage": 2.047621930006616,
+          "flooded_road_km": 3.3978552264189434,
+          "total_road_km": 139.80743903674738,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 11303,
+          "flooded_area_km2": 1.1152860954544916,
+          "exposed_population": 203.31033325195312,
+          "exposure_percentage": 3.0279036214021335,
+          "flooded_road_km": 6.376286691625313,
+          "total_road_km": 139.80743903674738,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_649970": {
+      "centroid": {
+        "lat": 6.23215211510759,
+        "lon": 80.87999626875795
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.868517248643563,
+      "pixel_area_m2": 98.68056201417374,
+      "total_footprint_population": 5032.8193359375,
+      "implied_population_density_per_km2": 194.55383884445098,
+      "ignore_fraction": 0.004917144775390625,
+      "ground_truth": {
+        "flooded_pixels": 17343,
+        "flooded_area_km2": 1.7114169870118154,
+        "exposed_population": 336.1751708984375,
+        "exposure_percentage": 6.679659023282141,
+        "flooded_road_km": 0.12902298191505288,
+        "total_road_km": 89.63724540188886,
+        "road_status": "roads flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 1641,
+          "flooded_area_km2": 0.1619348022652591,
+          "exposed_population": 17.83547019958496,
+          "exposure_percentage": 0.3543832792134713,
+          "flooded_road_km": 0.0,
+          "total_road_km": 89.63724540188886,
+          "road_status": "roads mapped but not flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 5519,
+          "flooded_area_km2": 0.5446180217562249,
+          "exposed_population": 184.13064575195312,
+          "exposure_percentage": 3.6585983613030644,
+          "flooded_road_km": 0.03463475138191018,
+          "total_road_km": 89.63724540188886,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 11854,
+          "flooded_area_km2": 1.1697593821160157,
+          "exposed_population": 493.40289306640625,
+          "exposure_percentage": 9.803707626522549,
+          "flooded_road_km": 0.4373471531947262,
+          "total_road_km": 89.63724540188886,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 4682,
+          "flooded_area_km2": 0.4620223913503615,
+          "exposed_population": 119.14097595214844,
+          "exposure_percentage": 2.3672810009571936,
+          "flooded_road_km": 0.09239845036852441,
+          "total_road_km": 89.63724540188886,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 8569,
+          "flooded_area_km2": 0.8455937358994549,
+          "exposed_population": 356.77435302734375,
+          "exposure_percentage": 7.088956094246224,
+          "flooded_road_km": 0.4449380358538355,
+          "total_road_km": 89.63724540188886,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 14904,
+          "flooded_area_km2": 1.4707350962592456,
+          "exposed_population": 731.5328369140625,
+          "exposure_percentage": 14.535249292388809,
+          "flooded_road_km": 0.8376092777972624,
+          "total_road_km": 89.63724540188886,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_450918": {
+      "centroid": {
+        "lat": 6.23215211510759,
+        "lon": 80.3280713581949
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.871943882181696,
+      "pixel_area_m2": 98.69363358376197,
+      "total_footprint_population": 5601.62939453125,
+      "implied_population_density_per_km2": 216.51366515173822,
+      "ignore_fraction": 0.6218643188476562,
+      "ground_truth": {
+        "flooded_pixels": 4277,
+        "flooded_area_km2": 0.42211267083774995,
+        "exposed_population": 93.55644989013672,
+        "exposure_percentage": 1.6701649341792204,
+        "flooded_road_km": 1.360581581974891,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 18,
+          "flooded_area_km2": 0.0017764854045077155,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.0,
+          "total_road_km": 99.39251184679527,
+          "road_status": "roads mapped but not flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 198,
+          "flooded_area_km2": 0.01954133944958487,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.0,
+          "total_road_km": 99.39251184679527,
+          "road_status": "roads mapped but not flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 905,
+          "flooded_area_km2": 0.08931773839330458,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.1819153069117277,
+          "total_road_km": 99.39251184679527,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 63,
+          "flooded_area_km2": 0.0062176989157770035,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.0,
+          "total_road_km": 99.39251184679527,
+          "road_status": "roads mapped but not flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 138,
+          "flooded_area_km2": 0.01361972143455915,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.0,
+          "total_road_km": 99.39251184679527,
+          "road_status": "roads mapped but not flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 391,
+          "flooded_area_km2": 0.03858921073125093,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.11503566725688179,
+          "total_road_km": 99.39251184679527,
+          "road_status": "roads flooded"
+        }
+      }
+    },
+    "Sri-Lanka_849649": {
+      "centroid": {
+        "lat": 6.5081145703891075,
+        "lon": 81.0179774963987
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.85486861921016,
+      "pixel_area_m2": 98.62849662479461,
+      "total_footprint_population": 1840.177978515625,
+      "implied_population_density_per_km2": 71.17336412022506,
+      "ignore_fraction": 0.16760635375976562,
+      "ground_truth": {
+        "flooded_pixels": 1892,
+        "flooded_area_km2": 0.18660511561411142,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 10.214511714354963,
+        "road_status": "roads mapped but not flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 454,
+          "flooded_area_km2": 0.044777337467656754,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.0,
+          "total_road_km": 10.214511714354963,
+          "road_status": "roads mapped but not flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 939,
+          "flooded_area_km2": 0.09261215833068213,
+          "exposed_population": 2.4412338733673096,
+          "exposure_percentage": 0.13266292184066483,
+          "flooded_road_km": 0.0,
+          "total_road_km": 10.214511714354963,
+          "road_status": "roads mapped but not flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 1670,
+          "flooded_area_km2": 0.164709589363407,
+          "exposed_population": 19.91800880432129,
+          "exposure_percentage": 1.0823957811074396,
+          "flooded_road_km": 0.0,
+          "total_road_km": 10.214511714354963,
+          "road_status": "roads mapped but not flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 68,
+          "flooded_area_km2": 0.006706737770486033,
+          "exposed_population": 0.0,
+          "exposure_percentage": 0.0,
+          "flooded_road_km": 0.0,
+          "total_road_km": 10.214511714354963,
+          "road_status": "roads mapped but not flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 1236,
+          "flooded_area_km2": 0.12190482182824613,
+          "exposed_population": 6.065280437469482,
+          "exposure_percentage": 0.3296029247324232,
+          "flooded_road_km": 0.0,
+          "total_road_km": 10.214511714354963,
+          "road_status": "roads mapped but not flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 1852,
+          "flooded_area_km2": 0.18265997574911963,
+          "exposed_population": 15.25527286529541,
+          "exposure_percentage": 0.8290107284949164,
+          "flooded_road_km": 0.0,
+          "total_road_km": 10.214511714354963,
+          "road_status": "roads mapped but not flooded"
+        }
+      }
+    },
+    "Sri-Lanka_713926": {
+      "centroid": {
+        "lat": 7.749945619155934,
+        "lon": 81.66188989205557
+      },
+      "crs": "EPSG:4326",
+      "utm_crs": "EPSG:32644",
+      "chip_area_km2": 25.79011523575601,
+      "pixel_area_m2": 98.3814820699921,
+      "total_footprint_population": 22909.20703125,
+      "implied_population_density_per_km2": 888.2940933698562,
+      "ignore_fraction": 0.000152587890625,
+      "ground_truth": {
+        "flooded_pixels": 80506,
+        "flooded_area_km2": 7.920299595526784,
+        "exposed_population": 542.2291259765625,
+        "exposure_percentage": 2.3668611717416423,
+        "flooded_road_km": 0.24474630453308802,
+        "total_road_km": 176.11025293919008,
+        "road_status": "roads flooded"
+      },
+      "unet_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 54113,
+          "flooded_area_km2": 5.323717139253483,
+          "exposed_population": 399.4560241699219,
+          "exposure_percentage": 1.7436484101131557,
+          "flooded_road_km": 0.07206934371220744,
+          "total_road_km": 176.11025293919008,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 78545,
+          "flooded_area_km2": 7.7273735091875295,
+          "exposed_population": 758.7365112304688,
+          "exposure_percentage": 3.3119283011214273,
+          "flooded_road_km": 0.26317219700547306,
+          "total_road_km": 176.11025293919008,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 86080,
+          "flooded_area_km2": 8.46867797658492,
+          "exposed_population": 1150.0150146484375,
+          "exposure_percentage": 5.0198813650761664,
+          "flooded_road_km": 1.329522492885115,
+          "total_road_km": 176.11025293919008,
+          "road_status": "roads flooded"
+        }
+      },
+      "deeplabv3p_resnet34": {
+        "conservative": {
+          "threshold": 0.7,
+          "flooded_pixels": 44885,
+          "flooded_area_km2": 4.415852822711595,
+          "exposed_population": 446.34637451171875,
+          "exposure_percentage": 1.9483274733292446,
+          "flooded_road_km": 0.11324947579012709,
+          "total_road_km": 176.11025293919008,
+          "road_status": "roads flooded"
+        },
+        "expected": {
+          "threshold": 0.5,
+          "flooded_pixels": 80624,
+          "flooded_area_km2": 7.931908610411043,
+          "exposed_population": 691.1094970703125,
+          "exposure_percentage": 3.016732513384613,
+          "flooded_road_km": 0.31618072183376444,
+          "total_road_km": 176.11025293919008,
+          "road_status": "roads flooded"
+        },
+        "worst_case": {
+          "threshold": 0.3,
+          "flooded_pixels": 85798,
+          "flooded_area_km2": 8.440934398641183,
+          "exposed_population": 1080.74462890625,
+          "exposure_percentage": 4.71751216631823,
+          "flooded_road_km": 1.5451316234519532,
+          "total_road_km": 176.11025293919008,
+          "road_status": "roads flooded"
+        }
+      }
+    }
+  }
+}
