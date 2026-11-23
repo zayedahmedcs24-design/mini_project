@@ -1,0 +1,58 @@
+{
+  "chip_id": "Paraguay_790830",
+  "group": "Test Split (High IoU >=90%)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": -57.308203213461695,
+    "south": -23.77876489675738,
+    "east": -57.262209470914776,
+    "north": -23.73277115421046
+  },
+  "leaflet_bounds": [
+    [
+      -23.77876489675738,
+      -57.308203213461695
+    ],
+    [
+      -23.73277115421046,
+      -57.262209470914776
+    ]
+  ],
+  "centroid": {
+    "lat": -23.75577,
+    "lon": -57.28521
+  },
+  "utm_crs": "EPSG:32721",
+  "chip_area_km2": 23.87,
+  "pixel_area_m2": 91.04,
+  "valid_pixels": 261199,
+  "flood_fraction_valid_pct": 12.23,
+  "ignore_fraction_pct": 0.36,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 12.22,
+      "f1": 21.77,
+      "precision": 12.22,
+      "recall": 99.74,
+      "tp_pixels": 31865,
+      "fp_pixels": 228900,
+      "fn_pixels": 82,
+      "tn_pixels": 1297
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 16.35,
+      "f1": 28.1,
+      "precision": 16.38,
+      "recall": 99.0,
+      "tp_pixels": 31627,
+      "fp_pixels": 161496,
+      "fn_pixels": 320,
+      "tn_pixels": 68701
+    }
+  },
+  "exposure": {
+    "available": false,
+    "note": "Exposure analysis not computed for this scene (WorldPop raster not present in benchmark dataset)."
+  }
+}

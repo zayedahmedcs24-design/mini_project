@@ -1,0 +1,58 @@
+{
+  "chip_id": "Nigeria_812045",
+  "group": "Test Split (High IoU >=90%)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": 5.795211560911857,
+    "south": 9.060767281743141,
+    "east": 5.841205303458776,
+    "north": 9.10676102429006
+  },
+  "leaflet_bounds": [
+    [
+      9.060767281743141,
+      5.795211560911857
+    ],
+    [
+      9.10676102429006,
+      5.841205303458776
+    ]
+  ],
+  "centroid": {
+    "lat": 9.08376,
+    "lon": 5.81821
+  },
+  "utm_crs": "EPSG:32631",
+  "chip_area_km2": 25.76,
+  "pixel_area_m2": 98.27,
+  "valid_pixels": 237134,
+  "flood_fraction_valid_pct": 50.65,
+  "ignore_fraction_pct": 9.54,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 50.69,
+      "f1": 67.28,
+      "precision": 50.69,
+      "recall": 99.99,
+      "tp_pixels": 120110,
+      "fp_pixels": 116829,
+      "fn_pixels": 8,
+      "tn_pixels": 25197
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 54.61,
+      "f1": 70.64,
+      "precision": 58.81,
+      "recall": 88.45,
+      "tp_pixels": 106244,
+      "fp_pixels": 74425,
+      "fn_pixels": 13874,
+      "tn_pixels": 67601
+    }
+  },
+  "exposure": {
+    "available": false,
+    "note": "Exposure analysis not computed for this scene (WorldPop raster not present in benchmark dataset)."
+  }
+}

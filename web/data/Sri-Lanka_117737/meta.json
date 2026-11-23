@@ -1,0 +1,134 @@
+{
+  "chip_id": "Sri-Lanka_117737",
+  "group": "Sri-Lanka (Test Split)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": 81.132961852766,
+    "south": 7.8189362329763155,
+    "east": 81.17895559531293,
+    "north": 7.864929975523235
+  },
+  "leaflet_bounds": [
+    [
+      7.8189362329763155,
+      81.132961852766
+    ],
+    [
+      7.864929975523235,
+      81.17895559531293
+    ]
+  ],
+  "centroid": {
+    "lat": 7.84193,
+    "lon": 81.15596
+  },
+  "utm_crs": "EPSG:32644",
+  "chip_area_km2": 25.78,
+  "pixel_area_m2": 98.35,
+  "valid_pixels": 262144,
+  "flood_fraction_valid_pct": 2.57,
+  "ignore_fraction_pct": 0.0,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 2.57,
+      "f1": 5.02,
+      "precision": 2.57,
+      "recall": 100.0,
+      "tp_pixels": 6731,
+      "fp_pixels": 254951,
+      "fn_pixels": 0,
+      "tn_pixels": 462
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 2.91,
+      "f1": 5.65,
+      "precision": 2.91,
+      "recall": 96.6,
+      "tp_pixels": 6502,
+      "fp_pixels": 217037,
+      "fn_pixels": 229,
+      "tn_pixels": 38376
+    }
+  },
+  "exposure": {
+    "available": true,
+    "event_key": "sri-lanka",
+    "total_footprint_population": 11846.4931640625,
+    "implied_density_per_km2": 459.49795211892445,
+    "ground_truth": {
+      "flooded_pixels": 6731,
+      "flooded_area_km2": 0.6619815669952392,
+      "exposed_population": 447.318115234375,
+      "exposure_percentage": 3.7759538543554685,
+      "flooded_road_km": 2.0900777473141705,
+      "total_road_km": 92.44590512181287,
+      "road_status": "roads flooded"
+    },
+    "unet_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 2215,
+        "flooded_area_km2": 0.21784120797718837,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.01381014940276134,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 7640,
+        "flooded_area_km2": 0.7513800582147716,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.24923188616654277,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 18121,
+        "flooded_area_km2": 1.7821672820562666,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.8674896254078294,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      }
+    },
+    "deeplabv3p_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 3130,
+        "flooded_area_km2": 0.30782978824767476,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.22920593807729353,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 7718,
+        "flooded_area_km2": 0.7590512158771737,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.3994498923690255,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 18105,
+        "flooded_area_km2": 1.7805937112537225,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 1.154582984146296,
+        "total_road_km": 92.44590512181287,
+        "road_status": "roads flooded"
+      }
+    },
+    "caveats": "Sensitivity range, not a statistical confidence interval; WorldPop year and product differ per event; OSM extract is from 2026; roads 'no roads in the extract' is not 0 km."
+  }
+}

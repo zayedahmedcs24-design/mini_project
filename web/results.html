@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloodMap AI | Master Benchmark & Exposure Results</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .filter-btn-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .filter-btn {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover {
+      color: var(--text-main);
+      background: var(--card-hover);
+    }
+    .filter-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: #38bdf8;
+    }
+    .highlight-row {
+      background: rgba(56, 189, 248, 0.08) !important;
+      font-weight: 600;
+    }
+    .pill-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .pill-unet { background: rgba(0, 206, 209, 0.15); color: #00ced1; border: 1px solid rgba(0, 206, 209, 0.3); }
+    .pill-deeplab { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+    .pill-otsu { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-icon">F</div>
+      <div class="logo-title">
+        <h1>FloodMap AI Explorer</h1>
+        <p>Sentinel-1 SAR Multi-Risk Segmentation & Geospatial Exposure</p>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Map Viewer</a>
+      <a href="results.html" class="active">Benchmark Results</a>
+    </nav>
+  </header>
+
+  <!-- Content Container -->
+  <div class="content-container">
+    
+    <div>
+      <h1 class="page-title">Experimental Benchmarks & Impact Assessment</h1>
+      <p class="page-subtitle">Multi-Seed Deep Ensembles, Bayesian Uncertainty Quantification, and Operational Disaster Exposure</p>
+    </div>
+
+    <!-- Section 1: Master Results Table -->
+    <section class="results-card">
+      <h2>1. Master Performance Benchmark Table</h2>
+      <p style="color:var(--text-muted);font-size:12px;margin-bottom:12px;">
+        Evaluated across 3 splits: <strong>Valid</strong> (27 chips), <strong>Test</strong> (90 chips, unseen during training), and <strong>Bolivia</strong> (15 chips, held-out event).
+        Deep learning models report 3-seed ensemble means and standard deviations.
+      </p>
+
+      <div class="filter-btn-group">
+        <button class="filter-btn active" data-filter="all">All Splits (24 Runs)</button>
+        <button class="filter-btn" data-filter="Test">Official TEST Split (90 Chips)</button>
+        <button class="filter-btn" data-filter="Bolivia">Held-Out Bolivia Event (15 Chips)</button>
+        <button class="filter-btn" data-filter="Valid">Validation Split (27 Chips)</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table" id="master-table">
+          <thead>
+            <tr>
+              <th>Split</th>
+              <th>Architecture / Baseline</th>
+              <th>Variant / Input Channels</th>
+              <th>Seeds Evaluated</th>
+              <th>Flood IoU (%)</th>
+              <th>Flood F1 (%)</th>
+              <th>Precision (%)</th>
+              <th>Recall (%)</th>
+            </tr>
+          </thead>
+          <tbody id="master-tbody">
+            <!-- Dynamically populated from web/data/metrics_summary_table.json -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 2: Model Performance & Uncertainty Figures Gallery -->
+    <section class="results-card">
+      <h2>2. Model Performance & Uncertainty Figures Gallery</h2>
+      
+      <div class="gallery-grid">
+        
+        <div class="gallery-card">
+          <img src="figures/fig_iou_bars.png" alt="Benchmark IoU Bars" loading="lazy" />
+          <div class="gallery-caption">
+            <h3>Master Benchmark IoU Comparison</h3>
+            <p>Comparative flood IoU across Otsu physics baseline, U-Net ResNet-34, and DeepLabV3+ ResNet-34 across Validation, Test, and Bolivia splits.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="figures/rejection_curves.png" alt="Uncertainty Rejection Curves" loading="lazy" />
+          <div class="gallery-caption">
+            <h3>Selective Segmentation & Uncertainty Rejection</h3>
+            <p>Monotonically increasing flood IoU as uncertain boundary pixels are withheld. DeepLabV3+ reaches &gt;84% IoU at 20% pixel rejection.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="figures/reliability_diagrams.png" alt="Reliability Diagrams" loading="lazy" />
+          <div class="gallery-caption">
+            <h3>Reliability Diagrams & Temperature Scaling Calibration</h3>
+            <p>Post-hoc calibration reduces Expected Calibration Error (ECE) from 4.7% to 1.1% on held-out events, aligning softmax confidence with empirical precision.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="figures/fig_otsu_failure.png" alt="Otsu Baseline Failure Analysis" loading="lazy" />
+          <div class="gallery-caption">
+            <h3>Otsu Physics Baseline Failure Modes</h3>
+            <p>Breakdown of Otsu threshold breakdown: bimodal distribution failure on low-water scenes leads to severe false positives in arid/urban terrain.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Multi-Country Disaster Exposure Benchmark Table -->
+    <section class="results-card">
+      <h2>3. Multi-Country Geospatial Disaster Exposure Benchmark</h2>
+      <p style="color:var(--text-muted);font-size:12px;margin-bottom:12px;">
+        Real-world operational exposure pipeline evaluated on real model outputs. Combines dynamic planar UTM metric area projection, 
+        WorldPop 100m fractional aggregation, and OpenStreetMap (OSM) local vector road extracts.
+      </p>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Country / Event</th>
+              <th>Split Name</th>
+              <th>Chips</th>
+              <th>Footprint Area</th>
+              <th>Footprint Pop</th>
+              <th>Implied Density</th>
+              <th>Observed Flood Area</th>
+              <th>Observed Exposed Pop</th>
+              <th>Observed Flooded Roads</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>Bolivia</strong></td>
+              <td>Held-out Event</td>
+              <td>15</td>
+              <td>379.7 km²</td>
+              <td>262.6</td>
+              <td>0.7 ppl/km²</td>
+              <td>43.86 km²</td>
+              <td>19.2</td>
+              <td>1.66 km (6/15 chips mapped)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Sri-Lanka</strong></td>
+              <td>Official TEST Split</td>
+              <td>9</td>
+              <td>232.5 km²</td>
+              <td>65,032.7</td>
+              <td>279.7 ppl/km²</td>
+              <td>37.40 km²</td>
+              <td>1,648.9</td>
+              <td>4.40 km (9/9 chips mapped)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:13px;font-weight:700;margin:20px 0 8px 0;color:#e2e8f0;">Three-Tier Operational Risk Scenario Comparison</h3>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Architecture</th>
+              <th>Operational Risk Tier</th>
+              <th>Flooded Area</th>
+              <th>Area Rel. Error (%)</th>
+              <th>Exposed Pop</th>
+              <th>Pop Rel. Error (%)</th>
+              <th>Flooded Roads</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Bolivia -->
+            <tr>
+              <td rowspan="7" style="vertical-align:middle;font-weight:700;background:rgba(255,255,255,0.01);">Bolivia</td>
+              <td><strong>Ground Truth</strong></td>
+              <td>Observed (label==1)</td>
+              <td><strong>43.86 km²</strong></td>
+              <td>0.00% (Ref)</td>
+              <td><strong>19.2</strong></td>
+              <td>0.00% (Ref)</td>
+              <td><strong>1.66 km</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="3" style="vertical-align:middle;">U-Net Ensemble</td>
+              <td>Conservative (p &gt; 0.70)</td>
+              <td>29.81 km²</td>
+              <td>-32.03%</td>
+              <td>14.0</td>
+              <td>-26.95%</td>
+              <td>1.90 km</td>
+            </tr>
+            <tr>
+              <td>Expected (p &gt; 0.50)</td>
+              <td>39.67 km²</td>
+              <td>-9.56%</td>
+              <td>19.1</td>
+              <td>-0.27%</td>
+              <td>2.12 km</td>
+            </tr>
+            <tr>
+              <td>Worst-Case (p &gt; 0.30)</td>
+              <td>48.37 km²</td>
+              <td>+10.27%</td>
+              <td>24.3</td>
+              <td>+26.73%</td>
+              <td>2.44 km</td>
+            </tr>
+            <tr>
+              <td rowspan="3" style="vertical-align:middle;">DeepLabV3+ Ensemble</td>
+              <td>Conservative (p &gt; 0.70)</td>
+              <td>30.51 km²</td>
+              <td>-30.45%</td>
+              <td>12.7</td>
+              <td>-33.62%</td>
+              <td>1.42 km</td>
+            </tr>
+            <tr>
+              <td>Expected (p &gt; 0.50)</td>
+              <td>41.23 km²</td>
+              <td>-6.00%</td>
+              <td>19.6</td>
+              <td>+2.13%</td>
+              <td>2.34 km</td>
+            </tr>
+            <tr>
+              <td>Worst-Case (p &gt; 0.30)</td>
+              <td>48.96 km²</td>
+              <td>+11.62%</td>
+              <td>24.3</td>
+              <td>+26.56%</td>
+              <td>2.49 km</td>
+            </tr>
+
+            <!-- Sri Lanka -->
+            <tr style="border-top:2px solid var(--border-color);">
+              <td rowspan="7" style="vertical-align:middle;font-weight:700;background:rgba(255,255,255,0.01);">Sri-Lanka (TEST Split)</td>
+              <td><strong>Ground Truth</strong></td>
+              <td>Observed (label==1)</td>
+              <td><strong>37.40 km²</strong></td>
+              <td>0.00% (Ref)</td>
+              <td><strong>1,648.9</strong></td>
+              <td>0.00% (Ref)</td>
+              <td><strong>4.40 km</strong></td>
+            </tr>
+            <tr>
+              <td rowspan="3" style="vertical-align:middle;">U-Net Ensemble</td>
+              <td>Conservative (p &gt; 0.70)</td>
+              <td>31.44 km²</td>
+              <td>-15.95%</td>
+              <td>586.1</td>
+              <td>-64.45%</td>
+              <td>1.70 km</td>
+            </tr>
+            <tr>
+              <td>Expected (p &gt; 0.50)</td>
+              <td>35.98 km²</td>
+              <td>-3.79%</td>
+              <td>1,240.7</td>
+              <td>-24.76%</td>
+              <td>5.79 km</td>
+            </tr>
+            <tr>
+              <td>Worst-Case (p &gt; 0.30)</td>
+              <td>39.50 km²</td>
+              <td>+5.60%</td>
+              <td>2,069.5</td>
+              <td>+25.51%</td>
+              <td>11.39 km</td>
+            </tr>
+            <tr>
+              <td rowspan="3" style="vertical-align:middle;">DeepLabV3+ Ensemble</td>
+              <td>Conservative (p &gt; 0.70)</td>
+              <td>31.63 km²</td>
+              <td>-15.44%</td>
+              <td>642.3</td>
+              <td>-61.04%</td>
+              <td>1.62 km</td>
+            </tr>
+            <tr>
+              <td>Expected (p &gt; 0.50)</td>
+              <td>36.71 km²</td>
+              <td>-1.86%</td>
+              <td>1,307.3</td>
+              <td>-20.72%</td>
+              <td>5.51 km</td>
+            </tr>
+            <tr>
+              <td>Worst-Case (p &gt; 0.30)</td>
+              <td>39.68 km²</td>
+              <td>+6.09%</td>
+              <td>2,189.9</td>
+              <td>+32.81%</td>
+              <td>12.98 km</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gallery-grid" style="margin-top:20px;">
+        <div class="gallery-card">
+          <img src="figures/fig_exposure_bolivia.png" alt="Bolivia Exposure Benchmark" loading="lazy" />
+          <div class="gallery-caption">
+            <h3>Bolivia Flood Event: Per-Chip Exposure Benchmark</h3>
+            <p>Ground truth vs DeepLabV3+ expected exposure with conservative-to-worst-case sensitivity bounds across all 15 chips in the Beni region.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="figures/fig_exposure_sri-lanka.png" alt="Sri Lanka Exposure Benchmark" loading="lazy" />
+          <div class="gallery-caption">
+            <h3>Sri-Lanka Flood Event: Per-Chip Exposure Benchmark (TEST Split)</h3>
+            <p>Predicted vs ground truth flooded surface area, affected population (WorldPop 2020), and submerged road networks across 9 unseen test chips.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="exposure-caveat-box" style="margin-top:20px;">
+        <strong>Methodological Notes & Limitations:</strong>
+        <ul style="margin-left:18px;margin-top:6px;line-height:1.5;">
+          <li>Thresholds $p &gt; 0.70$ (conservative), $p &gt; 0.50$ (expected), and $p &gt; 0.30$ (worst-case) provide an operational sensitivity range for disaster planning, not a formal Bayesian or frequentist confidence interval.</li>
+          <li>WorldPop rasters (Bolivia: 2018; Sri-Lanka: 2020 constrained) provide annualized baseline population grids under the uniform-distribution-within-100m-cell assumption.</li>
+          <li>Road networks were extracted from official 2026 Geofabrik shapefiles offline. In rural Bolivia, 9 chips contain no road lines inside their bounding box in the extract (distinct from mapped unflooded roads).</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script>
+    let tableData = [];
+
+    async function loadMasterTable() {
+      try {
+        const resp = await fetch("data/metrics_summary_table.json");
+        if (!resp.ok) throw new Error("Failed loading metrics_summary_table.json");
+        tableData = await resp.json();
+        renderTable("all");
+      } catch (err) {
+        console.error("Error loading metrics table:", err);
+      }
+    }
+
+    function renderTable(filter) {
+      const tbody = document.getElementById("master-tbody");
+      tbody.innerHTML = "";
+
+      const filtered = filter === "all" ? tableData : tableData.filter(r => r.Split === filter);
+
+      filtered.forEach(r => {
+        const tr = document.createElement("tr");
+
+        let badgeClass = "pill-otsu";
+        if (r["Architecture / Baseline"].includes("U-Net")) badgeClass = "pill-unet";
+        else if (r["Architecture / Baseline"].includes("DeepLab")) badgeClass = "pill-deeplab";
+
+        if (r["Architecture / Baseline"].includes("Ensemble") || r["Architecture / Baseline"].includes("ResNet-34")) {
+          tr.className = "highlight-row";
+        }
+
+        tr.innerHTML = `
+          <td><strong>${r.Split}</strong></td>
+          <td><span class="pill-badge ${badgeClass}">${r["Architecture / Baseline"]}</span></td>
+          <td>${r["Variant / Polarization"]}</td>
+          <td>${r["Seeds Evaluated"]}</td>
+          <td><strong>${r["Flood IoU (%)"]}</strong></td>
+          <td>${r["Flood F1 (%)"]}</td>
+          <td>${r["Precision (%)"]}</td>
+          <td>${r["Recall (%)"]}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderTable(btn.getAttribute("data-filter"));
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", loadMasterTable);
+  </script>
+</body>
+</html>

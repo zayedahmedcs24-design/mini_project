@@ -1,0 +1,134 @@
+{
+  "chip_id": "Bolivia_314919",
+  "group": "Bolivia (Held-out Event)",
+  "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+  "banner_text": "Bolivia = held-out event, 15 chips",
+  "bounds": {
+    "west": -65.12713944643801,
+    "south": -14.350047674638883,
+    "east": -65.08114570389108,
+    "north": -14.304053932091964
+  },
+  "leaflet_bounds": [
+    [
+      -14.350047674638883,
+      -65.12713944643801
+    ],
+    [
+      -14.304053932091964,
+      -65.08114570389108
+    ]
+  ],
+  "centroid": {
+    "lat": -14.32705,
+    "lon": -65.10414
+  },
+  "utm_crs": "EPSG:32720",
+  "chip_area_km2": 25.26,
+  "pixel_area_m2": 96.37,
+  "valid_pixels": 188845,
+  "flood_fraction_valid_pct": 44.31,
+  "ignore_fraction_pct": 27.96,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 44.38,
+      "f1": 61.47,
+      "precision": 44.39,
+      "recall": 99.96,
+      "tp_pixels": 83642,
+      "fp_pixels": 104799,
+      "fn_pixels": 36,
+      "tn_pixels": 73667
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 54.9,
+      "f1": 70.89,
+      "precision": 57.01,
+      "recall": 93.7,
+      "tp_pixels": 78407,
+      "fp_pixels": 59137,
+      "fn_pixels": 5271,
+      "tn_pixels": 119329
+    }
+  },
+  "exposure": {
+    "available": true,
+    "event_key": "bolivia",
+    "total_footprint_population": 7.575310707092285,
+    "implied_density_per_km2": 0.29987278675691986,
+    "ground_truth": {
+      "flooded_pixels": 83678,
+      "flooded_area_km2": 8.063707471007861,
+      "exposed_population": 2.3776156902313232,
+      "exposure_percentage": 31.386378488809864,
+      "flooded_road_km": null,
+      "total_road_km": null,
+      "road_status": "no roads in the extract"
+    },
+    "unet_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 48792,
+        "flooded_area_km2": 4.701885978697096,
+        "exposed_population": 1.3406212329864502,
+        "exposure_percentage": 17.69724417681391,
+        "flooded_road_km": null,
+        "total_road_km": null,
+        "road_status": "no roads in the extract"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 66505,
+        "flooded_area_km2": 6.408815523308132,
+        "exposed_population": 1.855716586112976,
+        "exposure_percentage": 24.496903927327836,
+        "flooded_road_km": null,
+        "total_road_km": null,
+        "road_status": "no roads in the extract"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 79867,
+        "flooded_area_km2": 7.696456949102331,
+        "exposed_population": 2.254840135574341,
+        "exposure_percentage": 29.76564556570962,
+        "flooded_road_km": null,
+        "total_road_km": null,
+        "road_status": "no roads in the extract"
+      }
+    },
+    "deeplabv3p_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 51536,
+        "flooded_area_km2": 4.966314063742694,
+        "exposed_population": 1.4419143199920654,
+        "exposure_percentage": 19.034391799165306,
+        "flooded_road_km": null,
+        "total_road_km": null,
+        "road_status": "no roads in the extract"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 71173,
+        "flooded_area_km2": 6.858651638830309,
+        "exposed_population": 2.0053911209106445,
+        "exposure_percentage": 26.472724333711135,
+        "flooded_road_km": null,
+        "total_road_km": null,
+        "road_status": "no roads in the extract"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 83233,
+        "flooded_area_km2": 8.020824636516137,
+        "exposed_population": 2.3561880588531494,
+        "exposure_percentage": 31.10351706956652,
+        "flooded_road_km": null,
+        "total_road_km": null,
+        "road_status": "no roads in the extract"
+      }
+    },
+    "caveats": "Sensitivity range, not a statistical confidence interval; WorldPop year and product differ per event; OSM extract is from 2026; roads 'no roads in the extract' is not 0 km."
+  }
+}

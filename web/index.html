@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloodMap AI | Interactive SAR Flood & Disaster Exposure Viewer</title>
+  
+  <!-- Vendored Leaflet (Offline, No External CDN) -->
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-icon">F</div>
+      <div class="logo-title">
+        <h1>FloodMap AI Explorer</h1>
+        <p>Sentinel-1 SAR Multi-Risk Segmentation & Geospatial Exposure</p>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Map Viewer</a>
+      <a href="results.html">Benchmark Results</a>
+    </nav>
+  </header>
+
+  <!-- Dynamic Split Context Banner -->
+  <div id="split-banner">
+    <span><strong>SPLIT CONTEXT:</strong> Loading scene metadata...</span>
+    <span class="badge">Initializing</span>
+  </div>
+
+  <!-- Application Body -->
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      
+      <!-- Chip Selector Section -->
+      <div class="sidebar-section">
+        <div class="section-title">
+          <span>Target Chip / Scene</span>
+          <span style="font-size:10px;color:var(--text-muted);">30 Precomputed</span>
+        </div>
+        <div class="chip-select-wrapper">
+          <select id="chip-select" aria-label="Select flood chip scene">
+            <option value="">Loading chips...</option>
+          </select>
+        </div>
+        
+        <div class="chip-meta-bar" id="chip-meta-container">
+          <div class="meta-pill">
+            <span class="label">Centroid (Lat, Lon)</span>
+            <span class="val" id="meta-centroid">-</span>
+          </div>
+          <div class="meta-pill">
+            <span class="label">Planar UTM CRS</span>
+            <span class="val" id="meta-utm">-</span>
+          </div>
+          <div class="meta-pill">
+            <span class="label">Ground Truth Flood %</span>
+            <span class="val" id="meta-flood-pct" style="color:var(--accent-blue);">-</span>
+          </div>
+          <div class="meta-pill">
+            <span class="label">Ignore Pixels (-1)</span>
+            <span class="val" id="meta-ignore-pct">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer Stacking & Controls -->
+      <div class="sidebar-section">
+        <div class="section-title">
+          <span>Layer Overlay Controls</span>
+          <label style="font-size:10px;text-transform:none;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <input type="checkbox" id="toggle-basemap" checked> Basemap
+          </label>
+        </div>
+        <div class="layer-list" id="layer-controls-list">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Segmentation Performance -->
+      <div class="sidebar-section">
+        <div class="section-title">
+          <span>Chip Segmentation Metrics</span>
+        </div>
+        <div id="metrics-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Exposure Assessment Card -->
+      <div class="sidebar-section" style="border-bottom:none;">
+        <div class="section-title">
+          <span>Human & Infrastructure Exposure</span>
+        </div>
+        <div id="exposure-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Map Viewport -->
+    <main id="map" role="region" aria-label="Geospatial Map Viewport">
+      
+      <!-- Interactive Map Legend -->
+      <div class="map-legend">
+        <div class="legend-title">Overlay Legend</div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#2980b9;"></span>
+          <span>Ground Truth Flood</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#00ced1;"></span>
+          <span>U-Net Pred (p &gt; 0.50)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#2ecc71;"></span>
+          <span>DeepLabV3+ (p &gt; 0.50)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#e74c3c;"></span>
+          <span>False Positive (Error)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#e67e22;"></span>
+          <span>False Negative (Error)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#e040fb;"></span>
+          <span>Uncertain Boundary (Entropy)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#7f8c8d;"></span>
+          <span>Ignore Mask (-1)</span>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+[
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "VV",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "18.72%",
+    "Flood F1 (%)": "31.54%",
+    "Precision (%)": "20.37%",
+    "Recall (%)": "69.82%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "VV",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "31.47%",
+    "Flood F1 (%)": "47.87%",
+    "Precision (%)": "35.55%",
+    "Recall (%)": "73.27%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "VH",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "22.00%",
+    "Flood F1 (%)": "36.06%",
+    "Precision (%)": "23.77%",
+    "Recall (%)": "74.67%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "VH",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "42.62%",
+    "Flood F1 (%)": "59.77%",
+    "Precision (%)": "48.42%",
+    "Recall (%)": "78.06%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "MEAN",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "21.52%",
+    "Flood F1 (%)": "35.42%",
+    "Precision (%)": "23.25%",
+    "Recall (%)": "74.33%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "MEAN",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "44.58%",
+    "Flood F1 (%)": "61.67%",
+    "Precision (%)": "53.49%",
+    "Recall (%)": "72.81%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "VV",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "21.87%",
+    "Flood F1 (%)": "35.89%",
+    "Precision (%)": "23.77%",
+    "Recall (%)": "73.22%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "VV",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "33.88%",
+    "Flood F1 (%)": "50.61%",
+    "Precision (%)": "39.04%",
+    "Recall (%)": "71.94%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "VH",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "23.98%",
+    "Flood F1 (%)": "38.68%",
+    "Precision (%)": "26.24%",
+    "Recall (%)": "73.52%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "VH",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "48.12%",
+    "Flood F1 (%)": "64.98%",
+    "Precision (%)": "54.56%",
+    "Recall (%)": "80.32%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "MEAN",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "24.73%",
+    "Flood F1 (%)": "39.65%",
+    "Precision (%)": "27.04%",
+    "Recall (%)": "74.32%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "MEAN",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "49.54%",
+    "Flood F1 (%)": "66.26%",
+    "Precision (%)": "58.60%",
+    "Recall (%)": "76.22%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "VV",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "31.11%",
+    "Flood F1 (%)": "47.46%",
+    "Precision (%)": "39.68%",
+    "Recall (%)": "59.03%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "VV",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "56.38%",
+    "Flood F1 (%)": "72.11%",
+    "Precision (%)": "63.19%",
+    "Recall (%)": "83.95%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "VH",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "33.34%",
+    "Flood F1 (%)": "50.01%",
+    "Precision (%)": "41.66%",
+    "Recall (%)": "62.54%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "VH",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "62.13%",
+    "Flood F1 (%)": "76.64%",
+    "Precision (%)": "71.15%",
+    "Recall (%)": "83.05%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "Otsu (Per-Chip Dynamic)",
+    "Variant / Polarization": "MEAN",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "34.73%",
+    "Flood F1 (%)": "51.55%",
+    "Precision (%)": "44.20%",
+    "Recall (%)": "61.84%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "Otsu (Train-Fitted Global)",
+    "Variant / Polarization": "MEAN",
+    "Seeds Evaluated": "Deterministic (N/A)",
+    "Flood IoU (%)": "64.81%",
+    "Flood F1 (%)": "78.65%",
+    "Precision (%)": "74.89%",
+    "Recall (%)": "82.80%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "U-Net ResNet-34",
+    "Variant / Polarization": "Dual-Pol (VV + VH)",
+    "Seeds Evaluated": "3/3 (0, 1, 2)",
+    "Flood IoU (%)": "60.60 ± 0.26%",
+    "Flood F1 (%)": "75.47 ± 0.20%",
+    "Precision (%)": "75.88 ± 4.37%",
+    "Recall (%)": "75.38 ± 4.23%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "U-Net ResNet-34",
+    "Variant / Polarization": "Dual-Pol (VV + VH)",
+    "Seeds Evaluated": "3/3 (0, 1, 2)",
+    "Flood IoU (%)": "63.81 ± 0.15%",
+    "Flood F1 (%)": "77.91 ± 0.11%",
+    "Precision (%)": "78.27 ± 4.01%",
+    "Recall (%)": "77.82 ± 4.06%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "U-Net ResNet-34",
+    "Variant / Polarization": "Dual-Pol (VV + VH)",
+    "Seeds Evaluated": "3/3 (0, 1, 2)",
+    "Flood IoU (%)": "60.30 ± 7.59%",
+    "Flood F1 (%)": "75.04 ± 6.08%",
+    "Precision (%)": "78.40 ± 1.17%",
+    "Recall (%)": "72.66 ± 11.45%"
+  },
+  {
+    "Split": "Valid",
+    "Architecture / Baseline": "DeepLabV3+ ResNet-34",
+    "Variant / Polarization": "Dual-Pol (VV + VH)",
+    "Seeds Evaluated": "3/3 (0, 1, 2)",
+    "Flood IoU (%)": "61.62 ± 0.35%",
+    "Flood F1 (%)": "76.25 ± 0.27%",
+    "Precision (%)": "78.08 ± 3.93%",
+    "Recall (%)": "74.71 ± 2.99%"
+  },
+  {
+    "Split": "Test",
+    "Architecture / Baseline": "DeepLabV3+ ResNet-34",
+    "Variant / Polarization": "Dual-Pol (VV + VH)",
+    "Seeds Evaluated": "3/3 (0, 1, 2)",
+    "Flood IoU (%)": "64.27 ± 0.52%",
+    "Flood F1 (%)": "78.25 ± 0.39%",
+    "Precision (%)": "79.72 ± 2.92%",
+    "Recall (%)": "76.99 ± 3.37%"
+  },
+  {
+    "Split": "Bolivia",
+    "Architecture / Baseline": "DeepLabV3+ ResNet-34",
+    "Variant / Polarization": "Dual-Pol (VV + VH)",
+    "Seeds Evaluated": "3/3 (0, 1, 2)",
+    "Flood IoU (%)": "61.89 ± 5.45%",
+    "Flood F1 (%)": "76.37 ± 4.18%",
+    "Precision (%)": "80.13 ± 3.49%",
+    "Recall (%)": "73.76 ± 10.56%"
+  }
+]

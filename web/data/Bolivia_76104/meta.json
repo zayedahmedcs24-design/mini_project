@@ -1,0 +1,134 @@
+{
+  "chip_id": "Bolivia_76104",
+  "group": "Bolivia (Held-out Event)",
+  "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+  "banner_text": "Bolivia = held-out event, 15 chips",
+  "bounds": {
+    "west": -64.75918950606265,
+    "south": -12.83225417059054,
+    "east": -64.71319576351573,
+    "north": -12.78626042804362
+  },
+  "leaflet_bounds": [
+    [
+      -12.83225417059054,
+      -64.75918950606265
+    ],
+    [
+      -12.78626042804362,
+      -64.71319576351573
+    ]
+  ],
+  "centroid": {
+    "lat": -12.80926,
+    "lon": -64.73619
+  },
+  "utm_crs": "EPSG:32720",
+  "chip_area_km2": 25.41,
+  "pixel_area_m2": 96.93,
+  "valid_pixels": 190965,
+  "flood_fraction_valid_pct": 0.0,
+  "ignore_fraction_pct": 27.15,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 0.0,
+      "f1": 0.01,
+      "precision": 0.0,
+      "recall": 100.0,
+      "tp_pixels": 5,
+      "fp_pixels": 190576,
+      "fn_pixels": 0,
+      "tn_pixels": 71563
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 0.0,
+      "f1": 0.01,
+      "precision": 0.0,
+      "recall": 100.0,
+      "tp_pixels": 5,
+      "fp_pixels": 188225,
+      "fn_pixels": 0,
+      "tn_pixels": 73914
+    }
+  },
+  "exposure": {
+    "available": true,
+    "event_key": "bolivia",
+    "total_footprint_population": 12.115806579589844,
+    "implied_density_per_km2": 0.47681982691916736,
+    "ground_truth": {
+      "flooded_pixels": 5,
+      "flooded_area_km2": 0.00048464987843131226,
+      "exposed_population": 0.00023050844902172685,
+      "exposure_percentage": 0.0019025431572177696,
+      "flooded_road_km": 0.0,
+      "total_road_km": 6.038567474477277,
+      "road_status": "roads mapped but not flooded"
+    },
+    "unet_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 0,
+        "flooded_area_km2": 0.0,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 6.038567474477277,
+        "road_status": "roads mapped but not flooded"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 0,
+        "flooded_area_km2": 0.0,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 6.038567474477277,
+        "road_status": "roads mapped but not flooded"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 32,
+        "flooded_area_km2": 0.0031017592219603984,
+        "exposed_population": 0.0014914630446583033,
+        "exposure_percentage": 0.0123100598780671,
+        "flooded_road_km": 0.0,
+        "total_road_km": 6.038567474477277,
+        "road_status": "roads mapped but not flooded"
+      }
+    },
+    "deeplabv3p_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 0,
+        "flooded_area_km2": 0.0,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 6.038567474477277,
+        "road_status": "roads mapped but not flooded"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 0,
+        "flooded_area_km2": 0.0,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 6.038567474477277,
+        "road_status": "roads mapped but not flooded"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 0,
+        "flooded_area_km2": 0.0,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 6.038567474477277,
+        "road_status": "roads mapped but not flooded"
+      }
+    },
+    "caveats": "Sensitivity range, not a statistical confidence interval; WorldPop year and product differ per event; OSM extract is from 2026; roads 'no roads in the extract' is not 0 km."
+  }
+}

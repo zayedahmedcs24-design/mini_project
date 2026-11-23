@@ -1,0 +1,134 @@
+{
+  "chip_id": "Sri-Lanka_450918",
+  "group": "Sri-Lanka (Test Split)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": 80.30507448692144,
+    "south": 6.209155243834132,
+    "east": 80.35106822946837,
+    "north": 6.255148986381052
+  },
+  "leaflet_bounds": [
+    [
+      6.209155243834132,
+      80.30507448692144
+    ],
+    [
+      6.255148986381052,
+      80.35106822946837
+    ]
+  ],
+  "centroid": {
+    "lat": 6.23215,
+    "lon": 80.32807
+  },
+  "utm_crs": "EPSG:32644",
+  "chip_area_km2": 25.87,
+  "pixel_area_m2": 98.69,
+  "valid_pixels": 99126,
+  "flood_fraction_valid_pct": 4.31,
+  "ignore_fraction_pct": 62.19,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 4.33,
+      "f1": 8.3,
+      "precision": 4.33,
+      "recall": 100.0,
+      "tp_pixels": 4277,
+      "fp_pixels": 94551,
+      "fn_pixels": 0,
+      "tn_pixels": 163316
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 2.49,
+      "f1": 4.85,
+      "precision": 2.73,
+      "recall": 22.02,
+      "tp_pixels": 942,
+      "fp_pixels": 33595,
+      "fn_pixels": 3335,
+      "tn_pixels": 224272
+    }
+  },
+  "exposure": {
+    "available": true,
+    "event_key": "sri-lanka",
+    "total_footprint_population": 5601.62939453125,
+    "implied_density_per_km2": 216.51366515173822,
+    "ground_truth": {
+      "flooded_pixels": 4277,
+      "flooded_area_km2": 0.42211267083774995,
+      "exposed_population": 93.55644989013672,
+      "exposure_percentage": 1.6701649341792204,
+      "flooded_road_km": 1.360581581974891,
+      "total_road_km": 99.39251184679527,
+      "road_status": "roads flooded"
+    },
+    "unet_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 18,
+        "flooded_area_km2": 0.0017764854045077155,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads mapped but not flooded"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 198,
+        "flooded_area_km2": 0.01954133944958487,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads mapped but not flooded"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 905,
+        "flooded_area_km2": 0.08931773839330458,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.1819153069117277,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads flooded"
+      }
+    },
+    "deeplabv3p_resnet34": {
+      "conservative": {
+        "threshold": 0.7,
+        "flooded_pixels": 63,
+        "flooded_area_km2": 0.0062176989157770035,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads mapped but not flooded"
+      },
+      "expected": {
+        "threshold": 0.5,
+        "flooded_pixels": 138,
+        "flooded_area_km2": 0.01361972143455915,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.0,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads mapped but not flooded"
+      },
+      "worst_case": {
+        "threshold": 0.3,
+        "flooded_pixels": 391,
+        "flooded_area_km2": 0.03858921073125093,
+        "exposed_population": 0.0,
+        "exposure_percentage": 0.0,
+        "flooded_road_km": 0.11503566725688179,
+        "total_road_km": 99.39251184679527,
+        "road_status": "roads flooded"
+      }
+    },
+    "caveats": "Sensitivity range, not a statistical confidence interval; WorldPop year and product differ per event; OSM extract is from 2026; roads 'no roads in the extract' is not 0 km."
+  }
+}

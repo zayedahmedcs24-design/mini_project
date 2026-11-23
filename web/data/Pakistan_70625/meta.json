@@ -1,0 +1,58 @@
+{
+  "chip_id": "Pakistan_70625",
+  "group": "Test Split (Low IoU <=5%)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": 71.4742759179129,
+    "south": 32.37959475303133,
+    "east": 71.52026966045983,
+    "north": 32.425588495578246
+  },
+  "leaflet_bounds": [
+    [
+      32.37959475303133,
+      71.4742759179129
+    ],
+    [
+      32.425588495578246,
+      71.52026966045983
+    ]
+  ],
+  "centroid": {
+    "lat": 32.40259,
+    "lon": 71.49727
+  },
+  "utm_crs": "EPSG:32642",
+  "chip_area_km2": 22.08,
+  "pixel_area_m2": 84.24,
+  "valid_pixels": 262144,
+  "flood_fraction_valid_pct": 1.78,
+  "ignore_fraction_pct": 0.0,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 1.78,
+      "f1": 3.5,
+      "precision": 1.78,
+      "recall": 100.0,
+      "tp_pixels": 4667,
+      "fp_pixels": 257030,
+      "fn_pixels": 0,
+      "tn_pixels": 447
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 2.42,
+      "f1": 4.73,
+      "precision": 2.43,
+      "recall": 93.44,
+      "tp_pixels": 4361,
+      "fp_pixels": 175270,
+      "fn_pixels": 306,
+      "tn_pixels": 82207
+    }
+  },
+  "exposure": {
+    "available": false,
+    "note": "Exposure analysis not computed for this scene (WorldPop raster not present in benchmark dataset)."
+  }
+}

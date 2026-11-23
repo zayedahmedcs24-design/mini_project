@@ -1,0 +1,58 @@
+{
+  "chip_id": "Somalia_699062",
+  "group": "Test Split (Low IoU <=5%)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": 45.39582389380955,
+    "south": 3.1735682357374455,
+    "east": 45.44181763635647,
+    "north": 3.219561978284365
+  },
+  "leaflet_bounds": [
+    [
+      3.1735682357374455,
+      45.39582389380955
+    ],
+    [
+      3.219561978284365,
+      45.44181763635647
+    ]
+  ],
+  "centroid": {
+    "lat": 3.19657,
+    "lon": 45.41882
+  },
+  "utm_crs": "EPSG:32638",
+  "chip_area_km2": 25.98,
+  "pixel_area_m2": 99.11,
+  "valid_pixels": 203209,
+  "flood_fraction_valid_pct": 1.62,
+  "ignore_fraction_pct": 22.48,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 1.62,
+      "f1": 3.19,
+      "precision": 1.62,
+      "recall": 100.0,
+      "tp_pixels": 3290,
+      "fp_pixels": 199559,
+      "fn_pixels": 0,
+      "tn_pixels": 59295
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 1.66,
+      "f1": 3.27,
+      "precision": 1.66,
+      "recall": 100.0,
+      "tp_pixels": 3290,
+      "fp_pixels": 194547,
+      "fn_pixels": 0,
+      "tn_pixels": 64307
+    }
+  },
+  "exposure": {
+    "available": false,
+    "note": "Exposure analysis not computed for this scene (WorldPop raster not present in benchmark dataset)."
+  }
+}

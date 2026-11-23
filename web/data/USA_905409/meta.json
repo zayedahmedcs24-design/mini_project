@@ -1,0 +1,58 @@
+{
+  "chip_id": "USA_905409",
+  "group": "Test Split (High IoU >=90%)",
+  "split_name": "Sen1Floods11 Official TEST Split",
+  "banner_text": "TEST split (not used in training)",
+  "bounds": {
+    "west": -94.93108461684184,
+    "south": 38.6807374819593,
+    "east": -94.88509087429492,
+    "north": 38.72673122450622
+  },
+  "leaflet_bounds": [
+    [
+      38.6807374819593,
+      -94.93108461684184
+    ],
+    [
+      38.72673122450622,
+      -94.88509087429492
+    ]
+  ],
+  "centroid": {
+    "lat": 38.70373,
+    "lon": -94.90809
+  },
+  "utm_crs": "EPSG:32615",
+  "chip_area_km2": 20.42,
+  "pixel_area_m2": 77.91,
+  "valid_pixels": 262099,
+  "flood_fraction_valid_pct": 16.97,
+  "ignore_fraction_pct": 0.02,
+  "metrics": {
+    "unet_resnet34": {
+      "iou": 16.93,
+      "f1": 28.96,
+      "precision": 16.94,
+      "recall": 99.68,
+      "tp_pixels": 44323,
+      "fp_pixels": 217338,
+      "fn_pixels": 144,
+      "tn_pixels": 339
+    },
+    "deeplabv3p_resnet34": {
+      "iou": 21.53,
+      "f1": 35.44,
+      "precision": 21.58,
+      "recall": 99.04,
+      "tp_pixels": 44041,
+      "fp_pixels": 160055,
+      "fn_pixels": 426,
+      "tn_pixels": 57622
+    }
+  },
+  "exposure": {
+    "available": false,
+    "note": "Exposure analysis not computed for this scene (WorldPop raster not present in benchmark dataset)."
+  }
+}

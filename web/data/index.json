@@ -1,0 +1,731 @@
+{
+  "total_chips": 30,
+  "groups": [
+    "Bolivia (Held-out Event)",
+    "Sri-Lanka (Test Split)",
+    "Test Split (High IoU >=90%)",
+    "Test Split (Low IoU <=5%)"
+  ],
+  "chips": [
+    {
+      "chip_id": "Bolivia_103757",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -14.23506,
+        "lon": -65.24212
+      },
+      "leaflet_bounds": [
+        [
+          -14.258060189545045,
+          -65.26512067407877
+        ],
+        [
+          -14.212066446998126,
+          -65.21912693153185
+        ]
+      ],
+      "flood_fraction_valid_pct": 40.15,
+      "unet_iou": 40.1,
+      "deeplab_iou": 69.11,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_129334",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -14.41904,
+        "lon": -65.19613
+      },
+      "leaflet_bounds": [
+        [
+          -14.442035159732722,
+          -65.21912693153185
+        ],
+        [
+          -14.396041417185803,
+          -65.17313318898492
+        ]
+      ],
+      "flood_fraction_valid_pct": 65.87,
+      "unet_iou": 65.76,
+      "deeplab_iou": 71.62,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_195474",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -15.38491,
+        "lon": -65.33411
+      },
+      "leaflet_bounds": [
+        [
+          -15.407903753218033,
+          -65.35710815917261
+        ],
+        [
+          -15.361910010671114,
+          -65.31111441662568
+        ]
+      ],
+      "flood_fraction_valid_pct": 0.59,
+      "unet_iou": 0.59,
+      "deeplab_iou": 0.63,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_23014",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -13.59115,
+        "lon": -64.87417
+      },
+      "leaflet_bounds": [
+        [
+          -13.614147793888172,
+          -64.89717073370342
+        ],
+        [
+          -13.568154051341253,
+          -64.85117699115649
+        ]
+      ],
+      "flood_fraction_valid_pct": 3.71,
+      "unet_iou": 3.71,
+      "deeplab_iou": 6.01,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_233925",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -12.80926,
+        "lon": -64.6902
+      },
+      "leaflet_bounds": [
+        [
+          -12.83225417059054,
+          -64.71319576351574
+        ],
+        [
+          -12.78626042804362,
+          -64.66720202096882
+        ]
+      ],
+      "flood_fraction_valid_pct": 0.0,
+      "unet_iou": 0.0,
+      "deeplab_iou": 0.0,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_242570",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -13.13121,
+        "lon": -64.78219
+      },
+      "leaflet_bounds": [
+        [
+          -13.154210368418976,
+          -64.80518324860958
+        ],
+        [
+          -13.108216625872057,
+          -64.75918950606265
+        ]
+      ],
+      "flood_fraction_valid_pct": 15.58,
+      "unet_iou": 15.61,
+      "deeplab_iou": 17.87,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_290290",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -13.03923,
+        "lon": -64.87417
+      },
+      "leaflet_bounds": [
+        [
+          -13.062222883325138,
+          -64.89717073370342
+        ],
+        [
+          -13.016229140778218,
+          -64.85117699115649
+        ]
+      ],
+      "flood_fraction_valid_pct": 9.63,
+      "unet_iou": 9.56,
+      "deeplab_iou": 10.15,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_294583",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -12.16534,
+        "lon": -64.6902
+      },
+      "leaflet_bounds": [
+        [
+          -12.188341774933667,
+          -64.71319576351574
+        ],
+        [
+          -12.142348032386748,
+          -64.66720202096882
+        ]
+      ],
+      "flood_fraction_valid_pct": 11.5,
+      "unet_iou": 11.53,
+      "deeplab_iou": 16.11,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_312675",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -14.74099,
+        "lon": -65.33411
+      },
+      "leaflet_bounds": [
+        [
+          -14.76399135756116,
+          -65.35710815917261
+        ],
+        [
+          -14.71799761501424,
+          -65.31111441662568
+        ]
+      ],
+      "flood_fraction_valid_pct": 6.06,
+      "unet_iou": 5.98,
+      "deeplab_iou": 6.7,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_314919",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -14.32705,
+        "lon": -65.10414
+      },
+      "leaflet_bounds": [
+        [
+          -14.350047674638883,
+          -65.12713944643801
+        ],
+        [
+          -14.304053932091964,
+          -65.08114570389108
+        ]
+      ],
+      "flood_fraction_valid_pct": 44.31,
+      "unet_iou": 44.38,
+      "deeplab_iou": 54.9,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_360519",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -13.54516,
+        "lon": -64.87417
+      },
+      "leaflet_bounds": [
+        [
+          -13.568154051341253,
+          -64.89717073370342
+        ],
+        [
+          -13.522160308794334,
+          -64.85117699115649
+        ]
+      ],
+      "flood_fraction_valid_pct": 1.1,
+      "unet_iou": 1.09,
+      "deeplab_iou": 1.09,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_379434",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -15.15494,
+        "lon": -65.4261
+      },
+      "leaflet_bounds": [
+        [
+          -15.177935040483435,
+          -65.44909564426645
+        ],
+        [
+          -15.131941297936516,
+          -65.40310190171952
+        ]
+      ],
+      "flood_fraction_valid_pct": 4.12,
+      "unet_iou": 4.12,
+      "deeplab_iou": 4.94,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_432776",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -14.37304,
+        "lon": -65.05815
+      },
+      "leaflet_bounds": [
+        [
+          -14.396041417185803,
+          -65.0811457038911
+        ],
+        [
+          -14.350047674638883,
+          -65.03515196134417
+        ]
+      ],
+      "flood_fraction_valid_pct": 45.98,
+      "unet_iou": 45.98,
+      "deeplab_iou": 65.14,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_60373",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -13.54516,
+        "lon": -65.05815
+      },
+      "leaflet_bounds": [
+        [
+          -13.568154051341253,
+          -65.0811457038911
+        ],
+        [
+          -13.522160308794334,
+          -65.03515196134417
+        ]
+      ],
+      "flood_fraction_valid_pct": 6.27,
+      "unet_iou": 6.27,
+      "deeplab_iou": 8.4,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Bolivia_76104",
+      "group": "Bolivia (Held-out Event)",
+      "split_name": "Sen1Floods11 Hand-Labeled Bolivia Split",
+      "centroid": {
+        "lat": -12.80926,
+        "lon": -64.73619
+      },
+      "leaflet_bounds": [
+        [
+          -12.83225417059054,
+          -64.75918950606265
+        ],
+        [
+          -12.78626042804362,
+          -64.71319576351573
+        ]
+      ],
+      "flood_fraction_valid_pct": 0.0,
+      "unet_iou": 0.0,
+      "deeplab_iou": 0.0,
+      "has_exposure": true,
+      "banner_text": "Bolivia = held-out event, 15 chips"
+    },
+    {
+      "chip_id": "Sri-Lanka_117737",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 7.84193,
+        "lon": 81.15596
+      },
+      "leaflet_bounds": [
+        [
+          7.8189362329763155,
+          81.132961852766
+        ],
+        [
+          7.864929975523235,
+          81.17895559531293
+        ]
+      ],
+      "flood_fraction_valid_pct": 2.57,
+      "unet_iou": 2.57,
+      "deeplab_iou": 2.91,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_1049830",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 6.23215,
+        "lon": 81.10996
+      },
+      "leaflet_bounds": [
+        [
+          6.209155243834132,
+          81.08696811021908
+        ],
+        [
+          6.255148986381052,
+          81.132961852766
+        ]
+      ],
+      "flood_fraction_valid_pct": 1.35,
+      "unet_iou": 1.35,
+      "deeplab_iou": 1.39,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_534068",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 7.97991,
+        "lon": 81.5699
+      },
+      "leaflet_bounds": [
+        [
+          7.956917460617074,
+          81.54690553568827
+        ],
+        [
+          8.002911203163993,
+          81.5928992782352
+        ]
+      ],
+      "flood_fraction_valid_pct": 98.14,
+      "unet_iou": 97.97,
+      "deeplab_iou": 75.19,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_922192",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 6.41613,
+        "lon": 81.33993
+      },
+      "leaflet_bounds": [
+        [
+          6.393130214021811,
+          81.31693682295368
+        ],
+        [
+          6.43912395656873,
+          81.3629305655006
+        ]
+      ],
+      "flood_fraction_valid_pct": 0.43,
+      "unet_iou": 0.43,
+      "deeplab_iou": 0.46,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_377277",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 6.27815,
+        "lon": 81.01798
+      },
+      "leaflet_bounds": [
+        [
+          6.2551489863810525,
+          80.99498062512524
+        ],
+        [
+          6.301142728927972,
+          81.04097436767216
+        ]
+      ],
+      "flood_fraction_valid_pct": 3.32,
+      "unet_iou": 3.32,
+      "deeplab_iou": 3.94,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_649970",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 6.23215,
+        "lon": 80.88
+      },
+      "leaflet_bounds": [
+        [
+          6.209155243834132,
+          80.85699939748449
+        ],
+        [
+          6.255148986381052,
+          80.90299314003141
+        ]
+      ],
+      "flood_fraction_valid_pct": 6.65,
+      "unet_iou": 6.66,
+      "deeplab_iou": 8.1,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_450918",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 6.23215,
+        "lon": 80.32807
+      },
+      "leaflet_bounds": [
+        [
+          6.209155243834132,
+          80.30507448692144
+        ],
+        [
+          6.255148986381052,
+          80.35106822946837
+        ]
+      ],
+      "flood_fraction_valid_pct": 4.31,
+      "unet_iou": 4.33,
+      "deeplab_iou": 2.49,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_849649",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 6.50811,
+        "lon": 81.01798
+      },
+      "leaflet_bounds": [
+        [
+          6.48511769911565,
+          80.99498062512524
+        ],
+        [
+          6.531111441662569,
+          81.04097436767216
+        ]
+      ],
+      "flood_fraction_valid_pct": 0.87,
+      "unet_iou": 0.87,
+      "deeplab_iou": 0.89,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Sri-Lanka_713926",
+      "group": "Sri-Lanka (Test Split)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 7.74995,
+        "lon": 81.66189
+      },
+      "leaflet_bounds": [
+        [
+          7.726948747882476,
+          81.6388930207821
+        ],
+        [
+          7.772942490429395,
+          81.68488676332903
+        ]
+      ],
+      "flood_fraction_valid_pct": 30.72,
+      "unet_iou": 30.7,
+      "deeplab_iou": 40.36,
+      "has_exposure": true,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "USA_905409",
+      "group": "Test Split (High IoU >=90%)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 38.70373,
+        "lon": -94.90809
+      },
+      "leaflet_bounds": [
+        [
+          38.6807374819593,
+          -94.93108461684184
+        ],
+        [
+          38.72673122450622,
+          -94.88509087429492
+        ]
+      ],
+      "flood_fraction_valid_pct": 16.97,
+      "unet_iou": 16.93,
+      "deeplab_iou": 21.53,
+      "has_exposure": false,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Nigeria_812045",
+      "group": "Test Split (High IoU >=90%)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 9.08376,
+        "lon": 5.81821
+      },
+      "leaflet_bounds": [
+        [
+          9.060767281743141,
+          5.795211560911857
+        ],
+        [
+          9.10676102429006,
+          5.841205303458776
+        ]
+      ],
+      "flood_fraction_valid_pct": 50.65,
+      "unet_iou": 50.69,
+      "deeplab_iou": 54.61,
+      "has_exposure": false,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Paraguay_790830",
+      "group": "Test Split (High IoU >=90%)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": -23.75577,
+        "lon": -57.28521
+      },
+      "leaflet_bounds": [
+        [
+          -23.77876489675738,
+          -57.308203213461695
+        ],
+        [
+          -23.73277115421046,
+          -57.262209470914776
+        ]
+      ],
+      "flood_fraction_valid_pct": 12.23,
+      "unet_iou": 12.22,
+      "deeplab_iou": 16.35,
+      "has_exposure": false,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Somalia_699062",
+      "group": "Test Split (Low IoU <=5%)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 3.19657,
+        "lon": 45.41882
+      },
+      "leaflet_bounds": [
+        [
+          3.1735682357374455,
+          45.39582389380955
+        ],
+        [
+          3.219561978284365,
+          45.44181763635647
+        ]
+      ],
+      "flood_fraction_valid_pct": 1.62,
+      "unet_iou": 1.62,
+      "deeplab_iou": 1.66,
+      "has_exposure": false,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Paraguay_271769",
+      "group": "Test Split (Low IoU <=5%)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": -23.43381,
+        "lon": -56.5953
+      },
+      "leaflet_bounds": [
+        [
+          -23.456808698928945,
+          -56.61829707525791
+        ],
+        [
+          -23.410814956382026,
+          -56.57230333271099
+        ]
+      ],
+      "flood_fraction_valid_pct": 1.0,
+      "unet_iou": 1.0,
+      "deeplab_iou": 1.16,
+      "has_exposure": false,
+      "banner_text": "TEST split (not used in training)"
+    },
+    {
+      "chip_id": "Pakistan_70625",
+      "group": "Test Split (Low IoU <=5%)",
+      "split_name": "Sen1Floods11 Official TEST Split",
+      "centroid": {
+        "lat": 32.40259,
+        "lon": 71.49727
+      },
+      "leaflet_bounds": [
+        [
+          32.37959475303133,
+          71.4742759179129
+        ],
+        [
+          32.425588495578246,
+          71.52026966045983
+        ]
+      ],
+      "flood_fraction_valid_pct": 1.78,
+      "unet_iou": 1.78,
+      "deeplab_iou": 2.42,
+      "has_exposure": false,
+      "banner_text": "TEST split (not used in training)"
+    }
+  ]
+}
