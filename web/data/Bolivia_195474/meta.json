@@ -31,24 +31,24 @@
   "ignore_fraction_pct": 0.31,
   "metrics": {
     "unet_resnet34": {
-      "iou": 0.59,
-      "f1": 1.18,
-      "precision": 0.59,
-      "recall": 100.0,
-      "tp_pixels": 1551,
-      "fp_pixels": 259330,
-      "fn_pixels": 0,
-      "tn_pixels": 1263
+      "iou": 0.16,
+      "f1": 0.31,
+      "precision": 0.83,
+      "recall": 0.19,
+      "tp_pixels": 3,
+      "fp_pixels": 360,
+      "fn_pixels": 1548,
+      "tn_pixels": 259424
     },
     "deeplabv3p_resnet34": {
-      "iou": 0.63,
-      "f1": 1.25,
-      "precision": 0.63,
-      "recall": 99.68,
-      "tp_pixels": 1546,
-      "fp_pixels": 244357,
-      "fn_pixels": 5,
-      "tn_pixels": 16236
+      "iou": 0.39,
+      "f1": 0.78,
+      "precision": 2.93,
+      "recall": 0.45,
+      "tp_pixels": 7,
+      "fp_pixels": 232,
+      "fn_pixels": 1544,
+      "tn_pixels": 259552
     }
   },
   "exposure": {

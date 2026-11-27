@@ -6,7 +6,6 @@
 let map = null;
 let currentChipId = null;
 let allChips = [];
-let baseOsmTileLayer = null;
 
 // Layer registry
 const layers = {
@@ -19,6 +18,17 @@ const layers = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  // CORS / file:// protocol guard
+  if (window.location.protocol === "file:") {
+    const banner = document.getElementById("split-banner");
+    if (banner) {
+      banner.style.background = "#dc2626";
+      banner.innerHTML = "<span><strong>CORS RESTRICTION:</strong> Browsers block local fetch() over file:// URLs. Start server: <code>python -m http.server 8000 --directory web</code> and open <a href='http://localhost:8000' style='color:#fff;text-decoration:underline;'>http://localhost:8000</a></span>";
+    }
+    console.error("Local file:// protocol detected. Start python -m http.server 8000 --directory web");
+    return;
+  }
+
   initMap();
   loadIndex();
   setupLayerControls();
@@ -28,33 +38,23 @@ function initMap() {
   map = L.map("map", {
     zoomControl: true,
     attributionControl: false,
-    minZoom: 4,
+    minZoom: 2,
     maxZoom: 18
   }).setView([0, 0], 2);
 
-  // Optional online basemap layer
-  try {
-    baseOsmTileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      opacity: 0.35
-    });
-    // Check basemap checkbox
-    const bmCheck = document.getElementById("toggle-basemap");
-    if (bmCheck && bmCheck.checked) {
-      baseOsmTileLayer.addTo(map);
-    }
-    if (bmCheck) {
-      bmCheck.addEventListener("change", (e) => {
-        if (e.target.checked) {
-          baseOsmTileLayer.addTo(map);
-        } else {
-          map.removeLayer(baseOsmTileLayer);
-        }
-      });
-    }
-  } catch (err) {
-    console.warn("Basemap unavailable in offline mode.", err);
-  }
+  // Dedicated custom panes with explicit z-index to guarantee consistent layer stacking order
+  const paneZIndexes = {
+    pane_sar_vv: 401,
+    pane_ground_truth: 402,
+    pane_prediction: 403,
+    pane_prediction_deeplab: 404,
+    pane_entropy: 405,
+    pane_error: 406
+  };
+  Object.entries(paneZIndexes).forEach(([pName, zIdx]) => {
+    map.createPane(pName);
+    map.getPane(pName).style.zIndex = zIdx;
+  });
 }
 
 async function loadIndex() {
@@ -162,6 +162,7 @@ async function loadChip(chipId) {
       }
 
       cfg.overlay = L.imageOverlay(imgUrl, bounds, {
+        pane: `pane_${layerKey}`,
         opacity: cfg.opacity,
         interactive: false
       });
@@ -229,7 +230,7 @@ function updateExposureCard(exposure) {
 
   function formatRoad(val, status) {
     if (val === null || val === undefined) {
-      return `<span style="color:#94a3b8;font-style:italic;" title="No roads inside bounding box in extract">null (no roads in extract)</span>`;
+      return `<span style="color:#94a3b8;font-style:italic;" title="No roads inside bounding box in extract">no roads in the extract</span>`;
     }
     return `${val.toFixed(2)} km`;
   }
@@ -322,6 +323,7 @@ function setupLayerControls() {
       layers[def.key].active = e.target.checked;
       if (layers[def.key].overlay) {
         if (e.target.checked) {
+          layers[def.key].overlay.setOpacity(layers[def.key].opacity);
           layers[def.key].overlay.addTo(map);
         } else {
           map.removeLayer(layers[def.key].overlay);

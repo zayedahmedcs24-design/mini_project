@@ -26,8 +26,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 40.15,
-      "unet_iou": 40.1,
-      "deeplab_iou": 69.11,
+      "unet_iou": 76.37,
+      "deeplab_iou": 81.04,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -50,8 +50,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 65.87,
-      "unet_iou": 65.76,
-      "deeplab_iou": 71.62,
+      "unet_iou": 84.46,
+      "deeplab_iou": 84.89,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -74,8 +74,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 0.59,
-      "unet_iou": 0.59,
-      "deeplab_iou": 0.63,
+      "unet_iou": 0.16,
+      "deeplab_iou": 0.39,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -98,8 +98,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 3.71,
-      "unet_iou": 3.71,
-      "deeplab_iou": 6.01,
+      "unet_iou": 19.56,
+      "deeplab_iou": 18.59,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -146,8 +146,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 15.58,
-      "unet_iou": 15.61,
-      "deeplab_iou": 17.87,
+      "unet_iou": 36.97,
+      "deeplab_iou": 35.43,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -170,8 +170,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 9.63,
-      "unet_iou": 9.56,
-      "deeplab_iou": 10.15,
+      "unet_iou": 52.95,
+      "deeplab_iou": 56.81,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -194,8 +194,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 11.5,
-      "unet_iou": 11.53,
-      "deeplab_iou": 16.11,
+      "unet_iou": 57.93,
+      "deeplab_iou": 73.15,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -218,8 +218,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 6.06,
-      "unet_iou": 5.98,
-      "deeplab_iou": 6.7,
+      "unet_iou": 9.75,
+      "deeplab_iou": 16.59,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -242,8 +242,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 44.31,
-      "unet_iou": 44.38,
-      "deeplab_iou": 54.9,
+      "unet_iou": 67.61,
+      "deeplab_iou": 71.27,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -266,8 +266,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 1.1,
-      "unet_iou": 1.09,
-      "deeplab_iou": 1.09,
+      "unet_iou": 20.67,
+      "deeplab_iou": 21.19,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -290,8 +290,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 4.12,
-      "unet_iou": 4.12,
-      "deeplab_iou": 4.94,
+      "unet_iou": 19.43,
+      "deeplab_iou": 28.82,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -314,8 +314,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 45.98,
-      "unet_iou": 45.98,
-      "deeplab_iou": 65.14,
+      "unet_iou": 57.72,
+      "deeplab_iou": 58.63,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -338,8 +338,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 6.27,
-      "unet_iou": 6.27,
-      "deeplab_iou": 8.4,
+      "unet_iou": 45.16,
+      "deeplab_iou": 54.83,
       "has_exposure": true,
       "banner_text": "Bolivia = held-out event, 15 chips"
     },
@@ -386,8 +386,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 2.57,
-      "unet_iou": 2.57,
-      "deeplab_iou": 2.91,
+      "unet_iou": 10.0,
+      "deeplab_iou": 9.95,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -410,8 +410,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 1.35,
-      "unet_iou": 1.35,
-      "deeplab_iou": 1.39,
+      "unet_iou": 33.13,
+      "deeplab_iou": 31.84,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -434,8 +434,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 98.14,
-      "unet_iou": 97.97,
-      "deeplab_iou": 75.19,
+      "unet_iou": 98.92,
+      "deeplab_iou": 99.49,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -458,8 +458,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 0.43,
-      "unet_iou": 0.43,
-      "deeplab_iou": 0.46,
+      "unet_iou": 19.77,
+      "deeplab_iou": 20.63,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -482,8 +482,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 3.32,
-      "unet_iou": 3.32,
-      "deeplab_iou": 3.94,
+      "unet_iou": 40.74,
+      "deeplab_iou": 49.33,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -506,8 +506,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 6.65,
-      "unet_iou": 6.66,
-      "deeplab_iou": 8.1,
+      "unet_iou": 13.6,
+      "deeplab_iou": 16.67,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -530,8 +530,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 4.31,
-      "unet_iou": 4.33,
-      "deeplab_iou": 2.49,
+      "unet_iou": 3.44,
+      "deeplab_iou": 2.75,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -554,8 +554,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 0.87,
-      "unet_iou": 0.87,
-      "deeplab_iou": 0.89,
+      "unet_iou": 41.98,
+      "deeplab_iou": 49.88,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -578,8 +578,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 30.72,
-      "unet_iou": 30.7,
-      "deeplab_iou": 40.36,
+      "unet_iou": 92.25,
+      "deeplab_iou": 94.14,
       "has_exposure": true,
       "banner_text": "TEST split (not used in training)"
     },
@@ -602,8 +602,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 16.97,
-      "unet_iou": 16.93,
-      "deeplab_iou": 21.53,
+      "unet_iou": 92.38,
+      "deeplab_iou": 90.42,
       "has_exposure": false,
       "banner_text": "TEST split (not used in training)"
     },
@@ -626,8 +626,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 50.65,
-      "unet_iou": 50.69,
-      "deeplab_iou": 54.61,
+      "unet_iou": 92.07,
+      "deeplab_iou": 91.22,
       "has_exposure": false,
       "banner_text": "TEST split (not used in training)"
     },
@@ -650,8 +650,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 12.23,
-      "unet_iou": 12.22,
-      "deeplab_iou": 16.35,
+      "unet_iou": 92.8,
+      "deeplab_iou": 90.1,
       "has_exposure": false,
       "banner_text": "TEST split (not used in training)"
     },
@@ -674,8 +674,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 1.62,
-      "unet_iou": 1.62,
-      "deeplab_iou": 1.66,
+      "unet_iou": 2.95,
+      "deeplab_iou": 5.11,
       "has_exposure": false,
       "banner_text": "TEST split (not used in training)"
     },
@@ -698,8 +698,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 1.0,
-      "unet_iou": 1.0,
-      "deeplab_iou": 1.16,
+      "unet_iou": 4.39,
+      "deeplab_iou": 7.08,
       "has_exposure": false,
       "banner_text": "TEST split (not used in training)"
     },
@@ -722,8 +722,8 @@
         ]
       ],
       "flood_fraction_valid_pct": 1.78,
-      "unet_iou": 1.78,
-      "deeplab_iou": 2.42,
+      "unet_iou": 5.48,
+      "deeplab_iou": 5.19,
       "has_exposure": false,
       "banner_text": "TEST split (not used in training)"
     }

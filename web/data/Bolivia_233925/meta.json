@@ -34,11 +34,11 @@
       "iou": 0.0,
       "f1": 0.0,
       "precision": 0.0,
-      "recall": 100.0,
-      "tp_pixels": 1,
-      "fp_pixels": 150536,
-      "fn_pixels": 0,
-      "tn_pixels": 111607
+      "recall": 0.0,
+      "tp_pixels": 0,
+      "fp_pixels": 5191,
+      "fn_pixels": 1,
+      "tn_pixels": 145345
     },
     "deeplabv3p_resnet34": {
       "iou": 0.0,
@@ -46,9 +46,9 @@
       "precision": 0.0,
       "recall": 0.0,
       "tp_pixels": 0,
-      "fp_pixels": 111523,
+      "fp_pixels": 5008,
       "fn_pixels": 1,
-      "tn_pixels": 150620
+      "tn_pixels": 145528
     }
   },
   "exposure": {

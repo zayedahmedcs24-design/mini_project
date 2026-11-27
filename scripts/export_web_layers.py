@@ -11,8 +11,8 @@ Exports for:
 Outputs per chip in web/data/<chip>/:
 - sar_vv.png (2-98 percentile stretch, RGBA)
 - ground_truth.png (flood blue, dry transparent, ignore gray)
-- prediction.png (U-Net 3-seed ensemble mean, p > 0.50)
-- prediction_deeplab.png (DeepLabV3+ 3-seed ensemble mean, p > 0.50)
+- prediction.png (U-Net 3-seed ensemble mean, p >= 0.50)
+- prediction_deeplab.png (DeepLabV3+ 3-seed ensemble mean, p >= 0.50)
 - entropy.png (ensemble predictive entropy, plasma colormap with uncertainty alpha scaling)
 - error.png (FP red, FN orange, ignore gray, correct transparent)
 - meta.json (EPSG:4326 bounds, centroid, metrics, split info, and full exposure data)
@@ -25,7 +25,7 @@ import os
 import json
 import time
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Tuple
 
 import numpy as np
 from PIL import Image
@@ -33,15 +33,16 @@ import rasterio
 import geopandas as gpd
 from shapely.geometry import box
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 import torch
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from src.floodmap.data.dataset import FloodDataset
 from src.floodmap.models.unet import FloodUNet
 from src.floodmap.models.deeplab import FloodDeepLabV3Plus
 from src.floodmap.uncertainty.ensemble import compute_uncertainty_maps
+from src.floodmap.metrics import compute_confusion_matrix, compute_metrics_from_counts
 
 # Targeted chips to export
 BOLIVIA_CHIPS = [
@@ -59,15 +60,15 @@ SRILANKA_CHIPS = [
 
 # 3 highest and 3 lowest IoU test chips (>= 1% flood)
 OTHER_TEST_CHIPS_HIGH = [
-    "USA_905409",       # 16.97% flood, U-Net IoU 91.53%, DeepLab IoU 89.65%
-    "Nigeria_812045",   # 50.65% flood, U-Net IoU 91.00%, DeepLab IoU 90.80%
-    "Paraguay_790830"   # 12.23% flood, U-Net IoU 90.91%, DeepLab IoU 89.51%
+    "USA_905409",
+    "Nigeria_812045",
+    "Paraguay_790830"
 ]
 
 OTHER_TEST_CHIPS_LOW = [
-    "Somalia_699062",   # 1.62% flood, U-Net IoU 3.15%, DeepLab IoU 5.31%
-    "Paraguay_271769",  # 1.00% flood, U-Net IoU 4.37%, DeepLab IoU 14.00%
-    "Pakistan_70625"    # 1.78% flood, U-Net IoU 5.26%, DeepLab IoU 5.25%
+    "Somalia_699062",
+    "Paraguay_271769",
+    "Pakistan_70625"
 ]
 
 
@@ -90,6 +91,24 @@ def load_all_models(device: torch.device):
     return unet_models, deeplab_models
 
 
+def build_dataset_lookup() -> Dict[str, Tuple[FloodDataset, int]]:
+    """Builds a lookup mapping chip_id to (FloodDataset, index)."""
+    bolivia_split = PROJECT_ROOT / "data" / "splits" / "flood_bolivia_data.csv"
+    test_split = PROJECT_ROOT / "data" / "splits" / "flood_test_data.csv"
+    data_dir = PROJECT_ROOT / "data"
+
+    bolivia_ds = FloodDataset(split_csv=bolivia_split, data_dir=data_dir)
+    test_ds = FloodDataset(split_csv=test_split, data_dir=data_dir)
+
+    lookup: Dict[str, Tuple[FloodDataset, int]] = {}
+    for i, (cid, _, _) in enumerate(bolivia_ds.samples):
+        lookup[cid] = (bolivia_ds, i)
+    for i, (cid, _, _) in enumerate(test_ds.samples):
+        lookup[cid] = (test_ds, i)
+
+    return lookup
+
+
 def export_layers():
     out_dir = PROJECT_ROOT / "web" / "data"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -99,6 +118,9 @@ def export_layers():
 
     print("Loading 6 ensemble checkpoints...")
     unet_models, deeplab_models = load_all_models(device)
+
+    print("Initializing FloodDataset loaders for Bolivia and Test splits...")
+    dataset_lookup = build_dataset_lookup()
 
     # Load precomputed exposure jsons if present
     exposure_data = {}
@@ -123,28 +145,29 @@ def export_layers():
     for cid in OTHER_TEST_CHIPS_LOW:
         work_items.append((cid, "Test Split (Low IoU <=5%)", "Sen1Floods11 Official TEST Split", False, None))
 
-    print(f"\nExporting {len(work_items)} chips to {out_dir}...")
     index_entries = []
 
+    print(f"\nProcessing and exporting layers for {len(work_items)} chips...")
     for i, (cid, group_name, split_name, has_exp, ev_key) in enumerate(work_items):
         t0 = time.time()
         chip_dir = out_dir / cid
         chip_dir.mkdir(parents=True, exist_ok=True)
 
-        # 1. Read S1 and Label
-        s1_path = PROJECT_ROOT / "data" / "raw" / "S1Hand" / f"{cid}_S1Hand.tif"
+        if cid not in dataset_lookup:
+            raise KeyError(f"Chip {cid} not found in FloodDataset splits!")
+
+        ds, ds_idx = dataset_lookup[cid]
+        s1_tensor, label_tensor, _ = ds[ds_idx]
+        label = label_tensor.numpy()
+
+        # 1. Read Spatial Metadata & Raw VV for visual stretch from original GeoTIFF
         lbl_path = PROJECT_ROOT / "data" / "raw" / "LabelHand" / f"{cid}_LabelHand.tif"
+        s1_path = PROJECT_ROOT / "data" / "raw" / "S1Hand" / f"{cid}_S1Hand.tif"
 
         with rasterio.open(s1_path) as s1_src:
-            s1_arr = s1_src.read()  # (2, 512, 512)
+            raw_vv = s1_src.read(1)
             bounds = s1_src.bounds
             crs = s1_src.crs
-
-        with rasterio.open(lbl_path) as lbl_src:
-            label = lbl_src.read(1)  # (512, 512)
-
-        # Clean NaNs in SAR if any
-        s1_clean = np.nan_to_num(s1_arr, nan=-25.0)
 
         # Centroid & Bounds in EPSG:4326
         west, south, east, north = bounds.left, bounds.bottom, bounds.right, bounds.top
@@ -160,13 +183,15 @@ def export_layers():
         chip_area_km2 = chip_area_m2 / 1e6
         pixel_area_m2 = chip_area_m2 / (512 * 512)
 
-        # 2. sar_vv.png (2-98 percentile stretch)
-        vv = s1_clean[0]
-        valid_vv = vv[np.isfinite(vv)]
-        p2 = np.percentile(valid_vv, 2)
-        p98 = np.percentile(valid_vv, 98)
-        stretched_vv = np.clip((vv - p2) / (p98 - p2 + 1e-7), 0.0, 1.0) * 255.0
-        stretched_vv = stretched_vv.astype(np.uint8)
+        # 2. sar_vv.png (2-98 percentile stretch of valid VV for visualization)
+        valid_vv = raw_vv[np.isfinite(raw_vv)]
+        if len(valid_vv) > 0:
+            p2 = np.percentile(valid_vv, 2)
+            p98 = np.percentile(valid_vv, 98)
+            stretched_vv = np.clip((raw_vv - p2) / (p98 - p2 + 1e-7), 0.0, 1.0) * 255.0
+        else:
+            stretched_vv = np.zeros_like(raw_vv)
+        stretched_vv = np.nan_to_num(stretched_vv, nan=0.0).astype(np.uint8)
 
         sar_rgba = np.zeros((512, 512, 4), dtype=np.uint8)
         sar_rgba[..., 0] = stretched_vv
@@ -178,15 +203,12 @@ def export_layers():
         # 3. ground_truth.png
         # Flood (1) = Blue, Dry (0) = Transparent, Ignore (-1) = Gray
         gt_rgba = np.zeros((512, 512, 4), dtype=np.uint8)
-        # Flood
         gt_rgba[label == 1] = [41, 128, 185, 200]
-        # Ignore
         gt_rgba[label == -1] = [127, 140, 141, 140]
-        # Dry remains [0, 0, 0, 0]
         Image.fromarray(gt_rgba).save(chip_dir / "ground_truth.png", optimize=True)
 
-        # 4. Model Inference
-        x_tensor = torch.from_numpy(s1_clean).float().unsqueeze(0).to(device)
+        # 4. Model Inference using canonical FloodDataset tensor
+        x_tensor = s1_tensor.unsqueeze(0).to(device)
         with torch.no_grad():
             u_probs = [torch.sigmoid(m(x_tensor)).squeeze().cpu().numpy() for m in unet_models]
             d_probs = [torch.sigmoid(m(x_tensor)).squeeze().cpu().numpy() for m in deeplab_models]
@@ -194,81 +216,77 @@ def export_layers():
         u_mean = compute_uncertainty_maps(u_probs)["mean"]
         d_mean = compute_uncertainty_maps(d_probs)["mean"]
 
-        # 5. prediction.png (U-Net, p > 0.50)
+        # 5. prediction.png (U-Net, p >= 0.50 on valid pixels)
         u_pred = (u_mean >= 0.50) & (label != -1)
         pred_rgba = np.zeros((512, 512, 4), dtype=np.uint8)
         pred_rgba[u_pred] = [0, 206, 209, 200]  # bright cyan / turquoise
         Image.fromarray(pred_rgba).save(chip_dir / "prediction.png", optimize=True)
 
-        # 6. prediction_deeplab.png (DeepLabV3+, p > 0.50)
+        # 6. prediction_deeplab.png (DeepLabV3+, p >= 0.50 on valid pixels)
         d_pred = (d_mean >= 0.50) & (label != -1)
         pred_dl_rgba = np.zeros((512, 512, 4), dtype=np.uint8)
         pred_dl_rgba[d_pred] = [46, 204, 113, 200]  # emerald green
         Image.fromarray(pred_dl_rgba).save(chip_dir / "prediction_deeplab.png", optimize=True)
 
         # 7. entropy.png (Predictive Entropy)
-        # H = -p*log2(p) - (1-p)*log2(1-p)
         p_safe = np.clip(u_mean, 1e-7, 1.0 - 1e-7)
         entropy = -p_safe * np.log2(p_safe) - (1.0 - p_safe) * np.log2(1.0 - p_safe)
         entropy_norm = np.clip(entropy, 0.0, 1.0)
 
-        # Map to plasma colormap
         cmap = plt.get_cmap("plasma")
         colored = (cmap(entropy_norm)[..., :3] * 255).astype(np.uint8)
 
         ent_rgba = np.zeros((512, 512, 4), dtype=np.uint8)
         ent_rgba[..., :3] = colored
-        # Alpha scaling: transparent for low entropy, opaque for high boundary uncertainty
         alpha_ent = np.clip(np.power(entropy_norm, 1.6) * 255.0, 0, 240).astype(np.uint8)
         alpha_ent[label == -1] = 0  # mask ignore pixels
         alpha_ent[entropy_norm < 0.08] = 0  # clear confident regions
         ent_rgba[..., 3] = alpha_ent
         Image.fromarray(ent_rgba).save(chip_dir / "entropy.png", optimize=True)
 
-        # 8. error.png (FP red, FN orange, ignore gray)
+        # 8. error.png (False Positive: Red, False Negative: Orange, Ignore: Gray)
         err_rgba = np.zeros((512, 512, 4), dtype=np.uint8)
-        fp_mask = (u_mean >= 0.50) & (label == 0)
-        fn_mask = (u_mean < 0.50) & (label == 1)
-        ign_mask = (label == -1)
-
-        err_rgba[fp_mask] = [231, 76, 60, 220]   # Red (False Positive)
-        err_rgba[fn_mask] = [230, 126, 34, 220]  # Orange (False Negative)
-        err_rgba[ign_mask] = [149, 165, 166, 120] # Gray (Ignore)
+        # FP: label == 0 & u_pred
+        err_rgba[(label == 0) & u_pred] = [231, 76, 60, 210]  # Coral Red
+        # FN: label == 1 & ~u_pred
+        err_rgba[(label == 1) & (~u_pred)] = [230, 126, 34, 210]  # Orange
+        # Ignore
+        err_rgba[label == -1] = [127, 140, 141, 140]
         Image.fromarray(err_rgba).save(chip_dir / "error.png", optimize=True)
 
-        # 9. Compute Per-Chip Classification Metrics
-        valid_mask = (label == 0) | (label == 1)
-        gt_binary = (label == 1) & valid_mask
-        n_valid = int(valid_mask.sum())
-        n_gt_flood = int(gt_binary.sum())
-        flood_frac_valid = (n_gt_flood / n_valid * 100.0) if n_valid > 0 else 0.0
-        ignore_frac = float((label == -1).sum() / label.size * 100.0)
+        # 9. Segmentation Metrics via canonical metrics module
+        cm_u = compute_confusion_matrix(u_mean, label, threshold=0.5, ignore_index=-1)
+        m_u = compute_metrics_from_counts(cm_u["tp"], cm_u["fp"], cm_u["fn"], cm_u["tn"])
+        metrics_unet = {
+            "iou": round(float(m_u["flood_iou"] * 100.0), 2),
+            "f1": round(float(m_u["flood_f1"] * 100.0), 2),
+            "precision": round(float(m_u["flood_precision"] * 100.0), 2),
+            "recall": round(float(m_u["flood_recall"] * 100.0), 2),
+            "tp_pixels": cm_u["tp"],
+            "fp_pixels": cm_u["fp"],
+            "fn_pixels": cm_u["fn"],
+            "tn_pixels": cm_u["tn"],
+        }
 
-        def calc_metrics(pred_bin):
-            tp = int(((pred_bin == 1) & (gt_binary == 1)).sum())
-            fp = int(((pred_bin == 1) & (gt_binary == 0)).sum())
-            fn = int(((pred_bin == 0) & (gt_binary == 1)).sum())
-            tn = int(((pred_bin == 0) & (gt_binary == 0)).sum())
+        cm_d = compute_confusion_matrix(d_mean, label, threshold=0.5, ignore_index=-1)
+        m_d = compute_metrics_from_counts(cm_d["tp"], cm_d["fp"], cm_d["fn"], cm_d["tn"])
+        metrics_dl = {
+            "iou": round(float(m_d["flood_iou"] * 100.0), 2),
+            "f1": round(float(m_d["flood_f1"] * 100.0), 2),
+            "precision": round(float(m_d["flood_precision"] * 100.0), 2),
+            "recall": round(float(m_d["flood_recall"] * 100.0), 2),
+            "tp_pixels": cm_d["tp"],
+            "fp_pixels": cm_d["fp"],
+            "fn_pixels": cm_d["fn"],
+            "tn_pixels": cm_d["tn"],
+        }
 
-            denom_iou = tp + fp + fn
-            iou = (tp / denom_iou * 100.0) if denom_iou > 0 else (100.0 if (tp == 0 and fn == 0 and fp == 0) else 0.0)
-            prec = (tp / (tp + fp) * 100.0) if (tp + fp) > 0 else 0.0
-            rec = (tp / (tp + fn) * 100.0) if (tp + fn) > 0 else 0.0
-            f1 = (2 * prec * rec / (prec + rec)) if (prec + rec) > 0 else 0.0
-
-            return {
-                "iou": round(float(iou), 2),
-                "f1": round(float(f1), 2),
-                "precision": round(float(prec), 2),
-                "recall": round(float(rec), 2),
-                "tp_pixels": tp,
-                "fp_pixels": fp,
-                "fn_pixels": fn,
-                "tn_pixels": tn,
-            }
-
-        metrics_unet = calc_metrics((u_mean >= 0.50) & valid_mask)
-        metrics_dl = calc_metrics((d_mean >= 0.50) & valid_mask)
+        n_valid = cm_u["valid_pixels"]
+        n_flood = int(np.sum(label == 1))
+        n_total = label.size
+        n_ignore = int(np.sum(label == -1))
+        flood_frac_valid = (n_flood / n_valid * 100.0) if n_valid > 0 else 0.0
+        ignore_frac = (n_ignore / n_total * 100.0)
 
         # 10. Pull Exposure Data (if present)
         chip_exposure = None

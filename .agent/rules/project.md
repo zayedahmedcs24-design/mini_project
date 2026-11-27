@@ -28,3 +28,6 @@
    - Every experiment must use a fixed seed and read from a YAML configuration in `configs/`.
    - All reported figures and tables must be generated programmatically from `results/*.json`.
    - Do NOT commit raw GeoTIFF datasets or `.pth` model checkpoints to Git.
+
+6. Preprocessing & Normalization Reuse:
+   - Any script that runs a model must reuse the FloodDataset preprocessing; never copy normalization constants.
